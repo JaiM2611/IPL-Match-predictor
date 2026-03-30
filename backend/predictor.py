@@ -3,6 +3,15 @@ import os
 import math
 from typing import Dict, List, Tuple, Optional
 
+try:
+    from backend.venue_stats import get_venue_profile, get_dew_factor_text
+except ImportError:
+    # Fallback if venue_stats not available
+    def get_venue_profile(venue: str) -> dict:
+        return {"type": "balanced", "dew_impact": "MODERATE", "avg_first_innings": 170}
+    def get_dew_factor_text(venue: str) -> str:
+        return "Dew impact not available"
+
 
 class IPLPredictor:
     """
@@ -566,12 +575,122 @@ class IPLPredictor:
 
         return xi[:11]
 
+    def _apply_weather_adjustments(
+        self,
+        t1_score: float,
+        t2_score: float,
+        weather_data: dict,
+        toss_decision: str,
+        time_of_day: str
+    ) -> Tuple[float, float, Optional[dict]]:
+        """
+        Apply weather-based adjustments to team scores.
+
+        Real-time weather data significantly impacts match outcomes:
+        - High dew favors chasing teams
+        - High humidity affects ball swing
+        - Rain probability impacts team selection
+        - Wind speed affects boundary scoring
+
+        Returns:
+            Tuple of (adjusted_t1_score, adjusted_t2_score, weather_factor_insight)
+        """
+        dew_risk = weather_data.get("dew_risk", "MODERATE")
+        humidity = weather_data.get("humidity_pct", 60)
+        temp = weather_data.get("temp_c", 30)
+        rain_prob = weather_data.get("rain_prob_pct", 0)
+        wind_speed = weather_data.get("wind_kmh", 10)
+
+        adjustment_t1 = 0
+        adjustment_t2 = 0
+        impact_level = "low"
+        details = []
+
+        # 1. Dew Factor Impact (most significant in evening matches)
+        if time_of_day in ("night", "day_night"):
+            if dew_risk == "HIGH":
+                # Significant advantage for chasing team
+                if toss_decision == "field":  # Team 2 batting second
+                    adjustment_t2 += 8
+                    impact_level = "high"
+                    details.append(f"Heavy dew ({weather_data.get('dewpoint_c', 18)}°C dew point) - batting second much easier")
+                else:  # Team 1 batting second
+                    adjustment_t1 += 8
+                    impact_level = "high"
+                    details.append(f"Heavy dew ({weather_data.get('dewpoint_c', 18)}°C dew point) - batting second much easier")
+            elif dew_risk == "MODERATE":
+                # Moderate advantage for chasing team
+                if toss_decision == "field":
+                    adjustment_t2 += 4
+                    impact_level = "medium"
+                    details.append("Moderate dew expected - slight advantage batting second")
+                else:
+                    adjustment_t1 += 4
+                    impact_level = "medium"
+                    details.append("Moderate dew expected - slight advantage batting second")
+
+        # 2. Humidity Impact on swing bowling
+        if humidity > 75:
+            # High humidity helps swing bowlers early on
+            details.append(f"High humidity ({humidity}%) - swing bowlers will be effective early")
+            # Minimal score adjustment as it affects both teams
+        elif humidity < 40:
+            # Dry conditions - less swing, better for batting
+            adjustment_t1 += 1
+            adjustment_t2 += 1
+            details.append(f"Low humidity ({humidity}%) - less swing, better batting conditions")
+
+        # 3. Rain Probability Impact
+        if rain_prob > 50:
+            # High rain risk - DLS scenarios favor chasing
+            if toss_decision == "field":
+                adjustment_t2 += 3
+            else:
+                adjustment_t1 += 3
+            if impact_level == "low":
+                impact_level = "medium"
+            details.append(f"High rain probability ({rain_prob}%) - DLS may favor chasing team")
+        elif rain_prob > 30:
+            details.append(f"Moderate rain risk ({rain_prob}%) - match may be affected")
+
+        # 4. Temperature Impact
+        if temp > 35:
+            # Very hot conditions - fatigue factor for fielding team
+            details.append(f"Hot conditions ({temp}°C) - fielding fatigue may be a factor")
+        elif temp < 20:
+            # Cooler conditions - ball may swing more
+            details.append(f"Cool conditions ({temp}°C) - ball may swing more with new ball")
+
+        # 5. Wind Speed Impact
+        if wind_speed > 25:
+            # Strong winds affect boundary hitting and fielding
+            details.append(f"Strong winds ({wind_speed} km/h) - may affect boundaries and catches")
+            adjustment_t1 += 2  # Both teams benefit from wind-assisted boundaries
+            adjustment_t2 += 2
+
+        # Apply adjustments
+        t1_score += adjustment_t1
+        t2_score += adjustment_t2
+
+        # Create weather factor insight
+        if details:
+            weather_factor = {
+                "factor": "Real-Time Weather Conditions",
+                "detail": " | ".join(details),
+                "impact": impact_level
+            }
+        else:
+            weather_factor = None
+
+        return t1_score, t2_score, weather_factor
+
     def predict(self, match_params: dict) -> dict:
         """
         Generate match prediction with enhanced accuracy using:
         - Logistic transformation for realistic probabilities
         - Comprehensive factor analysis
         - Context-aware confidence scoring
+        - Real-time weather and dew factor integration
         """
         team1 = match_params["team1"]
         team2 = match_params["team2"]
@@ -581,6 +700,7 @@ class IPLPredictor:
         toss_winner = match_params.get("toss_winner", "")
         toss_decision = match_params.get("toss_decision", "bat")
         injured_players = match_params.get("injured_players", [])
+        weather_data = match_params.get("weather_data")  # Optional weather data
 
         if team1 not in self.teams:
             return {"error": f"Unknown team: {team1}"}
@@ -591,6 +711,14 @@ class IPLPredictor:
             team1, team2, venue, match_type, time_of_day,
             toss_winner, toss_decision, injured_players,
         )
+
+        # Apply weather-based adjustments if weather data is provided
+        if weather_data and not weather_data.get("error"):
+            t1_score, t2_score, weather_factor = self._apply_weather_adjustments(
+                t1_score, t2_score, weather_data, toss_decision, time_of_day
+            )
+            if weather_factor:
+                factors.append(weather_factor)
 
         # Enhanced probability calculation using logistic transformation
         # This prevents extreme probabilities and gives more realistic predictions
@@ -628,13 +756,20 @@ class IPLPredictor:
         t2_xi = self._get_playing_xi(team2, venue, injured_players)
 
         venue_info = self.venues.get(venue, {})
+
+        # Enhance venue info with venue_stats module data
+        venue_profile = get_venue_profile(venue)
+        venue_info["pitch_profile"] = venue_profile.get("type", "balanced")
+        venue_info["historical_avg_score"] = venue_profile.get("avg_first_innings", 170)
+        venue_info["chasing_success_rate"] = venue_profile.get("chasing_success_pct", 50)
+
         form_data = {
             team1: self.recent_form.get(team1, {}),
             team2: self.recent_form.get(team2, {}),
         }
         h2h_data = self.get_h2h(team1, team2)
 
-        return {
+        result = {
             "predicted_winner": winner,
             "predicted_winner_name": self.teams[winner]["name"],
             "team1": team1,
@@ -655,5 +790,11 @@ class IPLPredictor:
             "recent_form": form_data,
             "match_type": match_type,
             "time_of_day": time_of_day,
-            "model_version": "2.0-enhanced",  # Track model version
+            "model_version": "2.1-weather",  # Track model version
         }
+
+        # Add weather data if available
+        if weather_data and not weather_data.get("error"):
+            result["weather"] = weather_data
+
+        return result

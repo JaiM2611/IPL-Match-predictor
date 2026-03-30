@@ -110,6 +110,26 @@ def live_matches():
     return jsonify(fetcher.get_live_matches())
 
 
+# ── Weather & Additional Data ─────────────────────────────────────────────────
+
+@app.route("/api/weather/<venue>", methods=["GET"])
+def weather(venue: str):
+    """Get real-time weather and dew factor for a venue (Open-Meteo - FREE)."""
+    return jsonify(fetcher.get_weather_and_dew(venue))
+
+
+@app.route("/api/scorecard/<match_id>", methods=["GET"])
+def scorecard(match_id: str):
+    """Get detailed match scorecard (requires CRIC_API_KEY)."""
+    return jsonify(fetcher.get_match_scorecard(match_id))
+
+
+@app.route("/api/player/<player_id>", methods=["GET"])
+def player_info(player_id: str):
+    """Get player information and career statistics (requires CRIC_API_KEY)."""
+    return jsonify(fetcher.get_player_info(player_id))
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
