@@ -20,7 +20,10 @@
       </div>
       <nav class="header-nav">
         <button class="nav-btn active" data-tab="predictor">Predict</button>
+        <button class="nav-btn" data-tab="live-scores">🔴 Live</button>
         <button class="nav-btn" data-tab="points-table">Points Table</button>
+        <button class="nav-btn" data-tab="orange-cap">🟠 Orange Cap</button>
+        <button class="nav-btn" data-tab="purple-cap">🟣 Purple Cap</button>
         <button class="nav-btn" data-tab="injuries">Injury Updates</button>
       </nav>
     </div>
@@ -221,6 +224,48 @@
         </div>
         <p class="muted small">Data fetched from ESPNcricinfo where available; otherwise uses cached data.</p>
         <div id="injuries-container">
+          <div class="loading-spinner">Loading…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TAB: LIVE SCORES ─────────────────────────────────────── -->
+    <section id="tab-live-scores" class="tab-section">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">🔴 Live &amp; Recent Scores</h2>
+          <span id="live-source-badge" class="source-badge"></span>
+        </div>
+        <p class="muted small">Live scores refresh every 60 seconds. Configure <code>CRIC_API_KEY</code> or <code>RAPIDAPI_KEY</code> for real-time data.</p>
+        <div id="live-matches-container">
+          <div class="loading-spinner">Loading…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TAB: ORANGE CAP ──────────────────────────────────────── -->
+    <section id="tab-orange-cap" class="tab-section">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">🟠 Orange Cap — Top Run Scorers</h2>
+          <span id="orange-source-badge" class="source-badge"></span>
+        </div>
+        <p class="muted small">IPL 2026 leading run-scorers. Live data via CricAPI / Cricbuzz when API keys are configured.</p>
+        <div id="orange-cap-container">
+          <div class="loading-spinner">Loading…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TAB: PURPLE CAP ──────────────────────────────────────── -->
+    <section id="tab-purple-cap" class="tab-section">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">🟣 Purple Cap — Top Wicket Takers</h2>
+          <span id="purple-source-badge" class="source-badge"></span>
+        </div>
+        <p class="muted small">IPL 2026 leading wicket-takers. Live data via CricAPI / Cricbuzz when API keys are configured.</p>
+        <div id="purple-cap-container">
           <div class="loading-spinner">Loading…</div>
         </div>
       </div>

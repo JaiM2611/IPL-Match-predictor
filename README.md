@@ -11,18 +11,21 @@ Advanced IPL match prediction engine powered by enhanced machine learning algori
 - **Dynamic Weighting**: Optimized factor weights based on predictive power
 - **Context-Aware Analysis**: Match type, venue conditions, and time-of-day adjustments
 
+### 🔄 Real-Time Data Integration (NEW)
+- **Live Scores** — Current match scorecard updated every 60 seconds via CricAPI / Cricbuzz
+- **Points Table** — Auto-refreshed standings with NRR and form guide (every 5 min)
+- **Orange Cap** — Live IPL 2026 top run-scorer leaderboard (every 10 min)
+- **Purple Cap** — Live IPL 2026 top wicket-taker leaderboard (every 10 min)
+- **Injury Updates** — Latest player availability news from News API / GNews
+- **Multi-source fallback**: CricAPI → RapidAPI/Cricbuzz → News API/GNews → static JSON
+- **In-memory caching** with per-source TTLs to avoid excessive API calls
+
 ### 🎨 Modern UI Redesign
 - Sleek dark theme with vibrant gradients (orange, teal, purple)
 - Animated backgrounds and smooth transitions
 - Enhanced card designs with hover effects and glowing borders
 - Responsive layout for all devices
 - Custom scrollbar and improved typography
-
-### 🔄 Updated API Integration
-- Configurable IPL 2026 series ID with multiple fallback options
-- Multi-source data aggregation (Cric API, FreeWebAPI, News API, GNews, TheSportsDB, ESPNcricinfo)
-- Automatic fallback mechanism for reliable data fetching
-- **python-espncricinfo library** integration ([outside-edge/python-espncricinfo](https://github.com/outside-edge/python-espncricinfo)) for live match data via Playwright/WebKit
 
 ## 🛠️ Setup
 
@@ -34,7 +37,47 @@ pip install -r requirements.txt
 playwright install webkit
 ```
 
+## 🔑 Real-Time API Configuration
+
+Set the following environment variables to enable live data. The app gracefully falls back to curated static data when keys are absent.
+
+| Variable | Source | Used For |
+|---|---|---|
+| `CRIC_API_KEY` | [cricapi.com](https://cricapi.com/) | Standings, stats, live scores |
+| `RAPIDAPI_KEY` | [rapidapi.com — Cricbuzz](https://rapidapi.com/cricbuzz/api/cricbuzz-cricket) | Standings, cap stats, live scores |
+| `NEWS_API_KEY` | [newsapi.org](https://newsapi.org/) | Injury / team news |
+| `GNEWS_API_KEY` | [gnews.io](https://gnews.io/) | Injury / team news (fallback) |
+| `IPL_2026_SERIES_ID_CRICAPI` | — | Override CricAPI series ID |
+| `IPL_2026_SERIES_ID_CRICBUZZ` | — | Override Cricbuzz series ID |
+
+```bash
+export CRIC_API_KEY="your-cricapi-key"
+export RAPIDAPI_KEY="your-rapidapi-key"
+export NEWS_API_KEY="your-newsapi-key"
+export GNEWS_API_KEY="your-gnews-key"
+```
+
 ## 🌐 API Endpoints
+
+### Core Prediction
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `GET /api/teams` | GET | All IPL 2026 teams |
+| `GET /api/venues` | GET | All IPL venues |
+| `GET /api/squad/<team>` | GET | Team squad & player details |
+| `GET /api/h2h/<team1>/<team2>` | GET | Head-to-head record |
+| `POST /api/predict` | POST | Generate match prediction |
+
+### Real-Time Data
+
+| Endpoint | Method | Description | Refresh |
+|---|---|---|---|
+| `GET /api/v2/standings` | GET | IPL 2026 points table | 5 min |
+| `GET /api/v2/injuries` | GET | Player injury updates | 5 min |
+| `GET /api/orange-cap` | GET | Top run-scorers leaderboard | 10 min |
+| `GET /api/purple-cap` | GET | Top wicket-takers leaderboard | 10 min |
+| `GET /api/live-matches` | GET | Live / recent match scores | 1 min |
 
 ### ESPNcricinfo (python-espncricinfo library — Playwright/WebKit)
 
@@ -48,7 +91,10 @@ playwright install webkit
 
 - **Match Prediction**: AI-powered predictions with confidence levels (Very High/High/Medium/Low/Very Low)
 - **Playing XI Selection**: Automatically selects optimal 11 players based on form, venue, and injuries
-- **Real-time Data**: Live points table, injury updates, and team news
+- **Live Scores**: Real-time match scorecard with per-over updates
+- **Orange & Purple Cap**: Live leaderboards for top run-scorers and wicket-takers
+- **Real-time Points Table**: Auto-refreshing standings with NRR and form
+- **Injury Tracker**: Latest player availability news from multiple news sources
 - **Multi-Factor Analysis**: Considers 9+ factors including:
   - Recent form & win rate (35 points)
   - Momentum analysis (15 points)

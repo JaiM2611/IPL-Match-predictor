@@ -1,0 +1,226 @@
+{
+  "orange_cap": [
+    {
+      "rank": 1,
+      "player": "Virat Kohli",
+      "team": "RCB",
+      "runs": 741,
+      "innings": 16,
+      "average": 49.4,
+      "strike_rate": 154.7,
+      "highest": 113,
+      "fifties": 5,
+      "hundreds": 1
+    },
+    {
+      "rank": 2,
+      "player": "Shubman Gill",
+      "team": "GT",
+      "runs": 709,
+      "innings": 17,
+      "average": 44.3,
+      "strike_rate": 149.5,
+      "highest": 94,
+      "fifties": 6,
+      "hundreds": 0
+    },
+    {
+      "rank": 3,
+      "player": "Travis Head",
+      "team": "SRH",
+      "runs": 689,
+      "innings": 15,
+      "average": 48.5,
+      "strike_rate": 191.4,
+      "highest": 102,
+      "fifties": 4,
+      "hundreds": 1
+    },
+    {
+      "rank": 4,
+      "player": "Rohit Sharma",
+      "team": "MI",
+      "runs": 652,
+      "innings": 16,
+      "average": 40.8,
+      "strike_rate": 145.2,
+      "highest": 105,
+      "fifties": 4,
+      "hundreds": 1
+    },
+    {
+      "rank": 5,
+      "player": "KL Rahul",
+      "team": "LSG",
+      "runs": 624,
+      "innings": 15,
+      "average": 44.6,
+      "strike_rate": 138.3,
+      "highest": 99,
+      "fifties": 5,
+      "hundreds": 0
+    },
+    {
+      "rank": 6,
+      "player": "Rishabh Pant",
+      "team": "DC",
+      "runs": 597,
+      "innings": 15,
+      "average": 39.8,
+      "strike_rate": 161.8,
+      "highest": 97,
+      "fifties": 4,
+      "hundreds": 0
+    },
+    {
+      "rank": 7,
+      "player": "Jos Buttler",
+      "team": "RR",
+      "runs": 578,
+      "innings": 14,
+      "average": 41.3,
+      "strike_rate": 152.1,
+      "highest": 107,
+      "fifties": 3,
+      "hundreds": 1
+    },
+    {
+      "rank": 8,
+      "player": "Ruturaj Gaikwad",
+      "team": "CSK",
+      "runs": 562,
+      "innings": 15,
+      "average": 40.1,
+      "strike_rate": 148.9,
+      "highest": 88,
+      "fifties": 4,
+      "hundreds": 0
+    },
+    {
+      "rank": 9,
+      "player": "Shreyas Iyer",
+      "team": "PBKS",
+      "runs": 538,
+      "innings": 14,
+      "average": 38.4,
+      "strike_rate": 144.6,
+      "highest": 96,
+      "fifties": 3,
+      "hundreds": 0
+    },
+    {
+      "rank": 10,
+      "player": "Venkatesh Iyer",
+      "team": "KKR",
+      "runs": 521,
+      "innings": 15,
+      "average": 34.7,
+      "strike_rate": 155.4,
+      "highest": 83,
+      "fifties": 3,
+      "hundreds": 0
+    }
+  ],
+  "purple_cap": [
+    {
+      "rank": 1,
+      "player": "Harshal Patel",
+      "team": "RCB",
+      "wickets": 32,
+      "innings": 16,
+      "economy": 7.05,
+      "average": 14.35,
+      "best": "5/27"
+    },
+    {
+      "rank": 2,
+      "player": "Jasprit Bumrah",
+      "team": "MI",
+      "wickets": 29,
+      "innings": 16,
+      "economy": 6.22,
+      "average": 15.48,
+      "best": "4/14"
+    },
+    {
+      "rank": 3,
+      "player": "Yuzvendra Chahal",
+      "team": "RR",
+      "wickets": 27,
+      "innings": 15,
+      "economy": 7.48,
+      "average": 16.74,
+      "best": "5/40"
+    },
+    {
+      "rank": 4,
+      "player": "Mohammed Shami",
+      "team": "GT",
+      "wickets": 26,
+      "innings": 17,
+      "economy": 8.03,
+      "average": 18.12,
+      "best": "4/22"
+    },
+    {
+      "rank": 5,
+      "player": "T Natarajan",
+      "team": "SRH",
+      "wickets": 24,
+      "innings": 14,
+      "economy": 7.61,
+      "average": 17.29,
+      "best": "4/30"
+    },
+    {
+      "rank": 6,
+      "player": "Rashid Khan",
+      "team": "GT",
+      "wickets": 23,
+      "innings": 17,
+      "economy": 6.94,
+      "average": 18.43,
+      "best": "4/19"
+    },
+    {
+      "rank": 7,
+      "player": "Ravichandran Ashwin",
+      "team": "CSK",
+      "wickets": 22,
+      "innings": 15,
+      "economy": 7.22,
+      "average": 19.05,
+      "best": "4/34"
+    },
+    {
+      "rank": 8,
+      "player": "Kuldeep Yadav",
+      "team": "DC",
+      "wickets": 21,
+      "innings": 15,
+      "economy": 7.35,
+      "average": 19.67,
+      "best": "3/14"
+    },
+    {
+      "rank": 9,
+      "player": "Arshdeep Singh",
+      "team": "PBKS",
+      "wickets": 20,
+      "innings": 14,
+      "economy": 7.87,
+      "average": 20.35,
+      "best": "4/23"
+    },
+    {
+      "rank": 10,
+      "player": "Varun Chakaravarthy",
+      "team": "KKR",
+      "wickets": 19,
+      "innings": 14,
+      "economy": 7.12,
+      "average": 21.47,
+      "best": "3/22"
+    }
+  ]
+}

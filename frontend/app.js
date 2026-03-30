@@ -25,11 +25,17 @@ let formChart = null;
 // Auto-refresh intervals
 let pointsTableRefreshInterval = null;
 let injuriesRefreshInterval = null;
+let liveScoresRefreshInterval = null;
+let orangeCapRefreshInterval = null;
+let purpleCapRefreshInterval = null;
 
 // Refresh intervals (in milliseconds)
 const REFRESH_INTERVALS = {
   pointsTable: 5 * 60 * 1000,  // 5 minutes
   injuries: 5 * 60 * 1000,      // 5 minutes
+  liveScores: 60 * 1000,        // 1 minute
+  orangeCap: 10 * 60 * 1000,   // 10 minutes
+  purpleCap: 10 * 60 * 1000,   // 10 minutes
 };
 
 /* ─── INIT ─────────────────────────────────────────────────────── */
@@ -59,6 +65,18 @@ function setupNavigation() {
         clearInterval(injuriesRefreshInterval);
         injuriesRefreshInterval = null;
       }
+      if (liveScoresRefreshInterval) {
+        clearInterval(liveScoresRefreshInterval);
+        liveScoresRefreshInterval = null;
+      }
+      if (orangeCapRefreshInterval) {
+        clearInterval(orangeCapRefreshInterval);
+        orangeCapRefreshInterval = null;
+      }
+      if (purpleCapRefreshInterval) {
+        clearInterval(purpleCapRefreshInterval);
+        purpleCapRefreshInterval = null;
+      }
 
       // Load data and setup auto-refresh for appropriate tabs
       if (tab === "points-table") {
@@ -68,6 +86,18 @@ function setupNavigation() {
       if (tab === "injuries") {
         loadInjuries();
         injuriesRefreshInterval = setInterval(loadInjuries, REFRESH_INTERVALS.injuries);
+      }
+      if (tab === "live-scores") {
+        loadLiveScores();
+        liveScoresRefreshInterval = setInterval(loadLiveScores, REFRESH_INTERVALS.liveScores);
+      }
+      if (tab === "orange-cap") {
+        loadOrangeCap();
+        orangeCapRefreshInterval = setInterval(loadOrangeCap, REFRESH_INTERVALS.orangeCap);
+      }
+      if (tab === "purple-cap") {
+        loadPurpleCap();
+        purpleCapRefreshInterval = setInterval(loadPurpleCap, REFRESH_INTERVALS.purpleCap);
       }
     });
   });
@@ -689,7 +719,181 @@ async function loadInjuries() {
   }
 }
 
+/* ─── LIVE SCORES ──────────────────────────────────────────────── */
+async function loadLiveScores() {
+  const container = document.getElementById("live-matches-container");
+  const badge = document.getElementById("live-source-badge");
+
+  if (!container.querySelector(".live-matches-list")) {
+    container.innerHTML = '<div class="loading-spinner">Fetching live scores…</div>';
+  }
+
+  try {
+    const resp = await apiFetch("/api/live-matches");
+    const source = resp.source || "none";
+
+    badge.textContent = source === "cric_api" || source === "cricbuzz" ? "🟢 Live" : "📦 Cached";
+    badge.className = "source-badge " + (source === "none" ? "" : source === "static" ? "cached" : "live");
+
+    const list = document.createElement("div");
+    list.className = "live-matches-list";
+
+    if (Array.isArray(resp.data) && resp.data.length > 0) {
+      resp.data.forEach((m) => {
+        const card = document.createElement("div");
+        card.className = "live-match-card";
+
+        const teams = (m.teams || []).map(escapeHtml).join(" vs ");
+        const scoreLines = Array.isArray(m.score)
+          ? m.score.map((s) => `<span class="live-score-line">${escapeHtml(s.inning)}: <strong>${escapeHtml(String(s.r))}/${escapeHtml(String(s.w))}</strong> (${escapeHtml(String(s.o))} ov)</span>`).join("")
+          : "";
+
+        card.innerHTML = `
+          <div class="live-match-header">
+            <span class="live-teams">${escapeHtml(m.name) || teams}</span>
+            <span class="live-status-badge">${escapeHtml(m.status) || "Live"}</span>
+          </div>
+          ${m.venue ? `<div class="live-venue muted small">📍 ${escapeHtml(m.venue)}</div>` : ""}
+          <div class="live-scores">${scoreLines || "<span class='muted'>Score not yet available</span>"}</div>
+        `;
+        list.appendChild(card);
+      });
+    } else {
+      const noMatchDiv = document.createElement("div");
+      noMatchDiv.className = "no-live-matches";
+      const iconDiv = document.createElement("div");
+      iconDiv.className = "no-live-icon";
+      iconDiv.textContent = "🏏";
+      const msgP = document.createElement("p");
+      msgP.className = "muted";
+      msgP.textContent = resp.message || "No live IPL matches at the moment.";
+      const hintP = document.createElement("p");
+      hintP.className = "muted small";
+      hintP.innerHTML = "Configure <code>CRIC_API_KEY</code> or <code>RAPIDAPI_KEY</code> environment variables for real-time scores.";
+      noMatchDiv.appendChild(iconDiv);
+      noMatchDiv.appendChild(msgP);
+      noMatchDiv.appendChild(hintP);
+      list.appendChild(noMatchDiv);
+    }
+
+    container.innerHTML = "";
+    container.appendChild(list);
+
+    if (resp.timestamp) {
+      const timeEl = document.createElement("p");
+      timeEl.className = "muted small";
+      timeEl.style.marginTop = "10px";
+      timeEl.textContent = `Last updated: ${new Date(resp.timestamp).toLocaleString()}`;
+      container.appendChild(timeEl);
+    }
+  } catch (e) {
+    container.innerHTML = `<p class="error-message">⚠️ Failed to load live scores: ${e.message}</p>`;
+    badge.textContent = "❌ Error";
+    badge.className = "source-badge error";
+  }
+}
+
+/* ─── ORANGE CAP ───────────────────────────────────────────────── */
+async function loadOrangeCap() {
+  await loadCapTable("orange");
+}
+
+/* ─── PURPLE CAP ───────────────────────────────────────────────── */
+async function loadPurpleCap() {
+  await loadCapTable("purple");
+}
+
+async function loadCapTable(type) {
+  const containerId = `${type}-cap-container`;
+  const badgeId = `${type}-source-badge`;
+  const container = document.getElementById(containerId);
+  const badge = document.getElementById(badgeId);
+  const isOrange = type === "orange";
+
+  if (!container.querySelector("table")) {
+    container.innerHTML = `<div class="loading-spinner">Fetching ${isOrange ? "Orange" : "Purple"} Cap data…</div>`;
+  }
+
+  try {
+    const resp = await apiFetch(`/api/${type}-cap`);
+    const source = resp.source || "static";
+    const isLive = source.startsWith("cric_api") || source === "cricbuzz";
+
+    badge.textContent = isLive ? "🟢 Live" : "📦 Cached";
+    badge.className = "source-badge " + (isLive ? "live" : "cached");
+
+    const table = document.createElement("table");
+    table.className = `cap-table ${type}-cap-table`;
+
+    const headerCells = isOrange
+      ? "<th>#</th><th>Player</th><th>Team</th><th>Runs</th><th>Inn</th><th>Avg</th><th>SR</th><th>HS</th><th>50s</th><th>100s</th>"
+      : "<th>#</th><th>Player</th><th>Team</th><th>Wkts</th><th>Inn</th><th>Avg</th><th>Econ</th><th>Best</th>";
+
+    table.innerHTML = `<thead><tr>${headerCells}</tr></thead><tbody></tbody>`;
+    const tbody = table.querySelector("tbody");
+
+    (resp.data || []).forEach((p, idx) => {
+      const tr = document.createElement("tr");
+      if (idx === 0) tr.className = "cap-leader";
+
+      const teamColor = TEAM_COLORS[p.team] || "#888";
+      const medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `${idx + 1}`;
+
+      if (isOrange) {
+        tr.innerHTML = `
+          <td class="cap-rank">${medal}</td>
+          <td class="cap-player-name">${escapeHtml(p.player)}</td>
+          <td><span class="team-dot" style="background:${escapeHtml(teamColor)}"></span> ${escapeHtml(p.team) || "—"}</td>
+          <td class="cap-highlight orange-text">${escapeHtml(String(p.runs ?? "—"))}</td>
+          <td>${escapeHtml(String(p.innings ?? "—"))}</td>
+          <td>${escapeHtml(String(p.average ?? "—"))}</td>
+          <td>${escapeHtml(String(p.strike_rate ?? "—"))}</td>
+          <td>${escapeHtml(String(p.highest ?? "—"))}</td>
+          <td>${escapeHtml(String(p.fifties ?? "—"))}</td>
+          <td>${escapeHtml(String(p.hundreds ?? "—"))}</td>
+        `;
+      } else {
+        tr.innerHTML = `
+          <td class="cap-rank">${medal}</td>
+          <td class="cap-player-name">${escapeHtml(p.player)}</td>
+          <td><span class="team-dot" style="background:${escapeHtml(teamColor)}"></span> ${escapeHtml(p.team) || "—"}</td>
+          <td class="cap-highlight purple-text">${escapeHtml(String(p.wickets ?? "—"))}</td>
+          <td>${escapeHtml(String(p.innings ?? "—"))}</td>
+          <td>${escapeHtml(String(p.average ?? "—"))}</td>
+          <td>${escapeHtml(String(p.economy ?? "—"))}</td>
+          <td>${escapeHtml(String(p.best ?? "—"))}</td>
+        `;
+      }
+      tbody.appendChild(tr);
+    });
+
+    container.innerHTML = "";
+    container.appendChild(table);
+
+    if (resp.timestamp) {
+      const timeEl = document.createElement("p");
+      timeEl.className = "muted small";
+      timeEl.style.marginTop = "10px";
+      timeEl.textContent = `Last updated: ${new Date(resp.timestamp).toLocaleString()}`;
+      container.appendChild(timeEl);
+    }
+  } catch (e) {
+    container.innerHTML = `<p class="error-message">⚠️ Failed to load ${type} cap data: ${e.message}</p>`;
+    badge.textContent = "❌ Error";
+    badge.className = "source-badge error";
+  }
+}
+
 /* ─── UTILS ─────────────────────────────────────────────────────── */
+function escapeHtml(str) {
+  if (str == null) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 async function apiFetch(url, options = {}) {
   const resp = await fetch(API + url, options);
   if (!resp.ok) {

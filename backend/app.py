@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from backend.predictor import IPLPredictor
+from backend.data_fetcher import RealTimeDataFetcher
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -13,6 +14,7 @@ CORS(app)
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 predictor = IPLPredictor(DATA_DIR)
+fetcher = RealTimeDataFetcher(DATA_DIR)
 
 
 # ── Serve frontend ──────────────────────────────────────────────────────────────
@@ -79,6 +81,33 @@ def predict():
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok", "teams_loaded": len(predictor.teams)})
+
+
+# ── Real-time data (v2) ───────────────────────────────────────────────────────────
+
+@app.route("/api/v2/standings", methods=["GET"])
+def standings():
+    return jsonify(fetcher.get_standings())
+
+
+@app.route("/api/v2/injuries", methods=["GET"])
+def injuries():
+    return jsonify(fetcher.get_injuries())
+
+
+@app.route("/api/orange-cap", methods=["GET"])
+def orange_cap():
+    return jsonify(fetcher.get_orange_cap())
+
+
+@app.route("/api/purple-cap", methods=["GET"])
+def purple_cap():
+    return jsonify(fetcher.get_purple_cap())
+
+
+@app.route("/api/live-matches", methods=["GET"])
+def live_matches():
+    return jsonify(fetcher.get_live_matches())
 
 
 if __name__ == "__main__":
