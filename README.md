@@ -4,20 +4,39 @@ Advanced IPL match prediction engine powered by enhanced machine learning algori
 
 ## ✨ Latest Updates (2026)
 
-### 🎯 Enhanced Prediction Model v2.0
+### 🎯 Enhanced Prediction Model v2.1 (Weather Integration)
+- **Real-Time Weather Data**: Live weather conditions via Open-Meteo API (100% FREE, no API key needed!)
+- **Dew Factor Analysis**: Precise dew point calculations for accurate chasing advantage predictions
 - **Momentum Analysis**: Exponentially weighted recent match performance
 - **Advanced Squad Strength**: Role-based composition analysis (batsmen, bowlers, all-rounders, key players, overseas)
 - **Logistic Transformation**: Sigmoid function for realistic probability distribution
 - **Dynamic Weighting**: Optimized factor weights based on predictive power
 - **Context-Aware Analysis**: Match type, venue conditions, and time-of-day adjustments
+- **Weather Impact Scoring**: Temperature, humidity, wind speed, and rain probability affect predictions
 
-### 🔄 Real-Time Data Integration (NEW)
+### 🌤️ Weather & Venue Intelligence (NEW)
+- **Open-Meteo Integration** — FREE real-time weather API (no key required)
+- **Dew Risk Calculation** — High/Medium/Low dew factor based on dewpoint temperature
+- **Venue-Specific Profiles** — Historical data for all 11 IPL venues with:
+  - Pitch type (batting/spin/balanced)
+  - Average scores and chasing success rates
+  - Boundary sizes and altitude effects
+  - Toss advantage statistics
+- **Weather Factors Considered**:
+  - Temperature (°C) and its effect on fielding fatigue
+  - Humidity (%) impact on swing bowling
+  - Dew point (°C) for evening match advantage
+  - Wind speed (km/h) affecting boundaries
+  - Rain probability (%) for DLS scenarios
+
+### 🔄 Real-Time Data Integration
 - **Live Scores** — Current match scorecard updated every 60 seconds via CricAPI / Cricbuzz
 - **Points Table** — Auto-refreshed standings with NRR and form guide (every 5 min)
 - **Orange Cap** — Live IPL 2026 top run-scorer leaderboard (every 10 min)
 - **Purple Cap** — Live IPL 2026 top wicket-taker leaderboard (every 10 min)
 - **Injury Updates** — Latest player availability news from News API / GNews
-- **Multi-source fallback**: CricAPI → RapidAPI/Cricbuzz → News API/GNews → static JSON
+- **Weather Data** — Real-time conditions cached for 30 minutes
+- **Multi-source fallback**: CricAPI → RapidAPI/Cricbuzz → News API/GNews → Open-Meteo → static JSON
 - **In-memory caching** with per-source TTLs to avoid excessive API calls
 
 ### 🎨 Modern UI Redesign
@@ -78,6 +97,9 @@ export GNEWS_API_KEY="your-gnews-key"
 | `GET /api/orange-cap` | GET | Top run-scorers leaderboard | 10 min |
 | `GET /api/purple-cap` | GET | Top wicket-takers leaderboard | 10 min |
 | `GET /api/live-matches` | GET | Live / recent match scores | 1 min |
+| `GET /api/weather/<venue>` | GET | Real-time weather & dew factor (FREE) | 30 min |
+| `GET /api/scorecard/<match_id>` | GET | Detailed match scorecard | On demand |
+| `GET /api/player/<player_id>` | GET | Player info & career stats | On demand |
 
 ### ESPNcricinfo (python-espncricinfo library — Playwright/WebKit)
 
@@ -90,12 +112,14 @@ export GNEWS_API_KEY="your-gnews-key"
 ## 🚀 Features
 
 - **Match Prediction**: AI-powered predictions with confidence levels (Very High/High/Medium/Low/Very Low)
+- **Real-Time Weather Integration**: Live weather conditions with dew factor analysis (100% FREE via Open-Meteo)
 - **Playing XI Selection**: Automatically selects optimal 11 players based on form, venue, and injuries
+- **Venue Intelligence**: Historical pitch profiles for all 11 IPL venues with toss statistics
 - **Live Scores**: Real-time match scorecard with per-over updates
 - **Orange & Purple Cap**: Live leaderboards for top run-scorers and wicket-takers
 - **Real-time Points Table**: Auto-refreshing standings with NRR and form
 - **Injury Tracker**: Latest player availability news from multiple news sources
-- **Multi-Factor Analysis**: Considers 9+ factors including:
+- **Multi-Factor Analysis**: Considers 10+ factors including:
   - Recent form & win rate (35 points)
   - Momentum analysis (15 points)
   - Head-to-head record (15 points)
@@ -105,6 +129,7 @@ export GNEWS_API_KEY="your-gnews-key"
   - Venue suitability (10 points)
   - Squad strength & availability (multiplier)
   - Time of day conditions
+  - **Real-time weather impact** (NEW - temperature, humidity, dew, wind, rain probability)
 
 ## Frontend Screenshots
 

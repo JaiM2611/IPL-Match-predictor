@@ -31,6 +31,7 @@ CACHE_TTL: Dict[str, int] = {
     "orange_cap": 10 * 60,     # 10 minutes
     "purple_cap": 10 * 60,     # 10 minutes
     "live_matches": 60,         # 1 minute — live scores refresh fast
+    "weather": 30 * 60,         # 30 minutes — weather changes slowly
 }
 
 # IPL 2026 series IDs (best-guess / update when official IDs are published)
@@ -38,6 +39,21 @@ IPL_2026_SERIES_ID_CRICAPI = os.environ.get(
     "IPL_2026_SERIES_ID_CRICAPI", "d5a498c8-7596-4b93-8ab0-e0efc3345312"
 )
 IPL_2026_SERIES_ID_CRICBUZZ = os.environ.get("IPL_2026_SERIES_ID_CRICBUZZ", "9237")
+
+# ── IPL Venue Locations (for weather API) ─────────────────────────────────────
+IPL_VENUE_CITIES: Dict[str, Dict[str, Any]] = {
+    "Wankhede Stadium": {"lat": 18.9385, "lon": 72.8254, "city": "Mumbai"},
+    "M. Chinnaswamy Stadium": {"lat": 12.9791, "lon": 77.5497, "city": "Bangalore"},
+    "Eden Gardens": {"lat": 22.5645, "lon": 88.3433, "city": "Kolkata"},
+    "MA Chidambaram Stadium": {"lat": 13.0604, "lon": 80.2790, "city": "Chennai"},
+    "Narendra Modi Stadium": {"lat": 23.0901, "lon": 72.5940, "city": "Ahmedabad"},
+    "Rajiv Gandhi Intl. Cricket Stadium": {"lat": 17.4065, "lon": 78.5480, "city": "Hyderabad"},
+    "Sawai Mansingh Stadium": {"lat": 26.8928, "lon": 75.8154, "city": "Jaipur"},
+    "Punjab Cricket Association Stadium": {"lat": 30.7140, "lon": 76.7174, "city": "Mohali"},
+    "Dr. DY Patil Sports Academy": {"lat": 19.0338, "lon": 73.0160, "city": "Navi Mumbai"},
+    "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium": {"lat": 26.8700, "lon": 80.8895, "city": "Lucknow"},
+    "Arun Jaitley Stadium": {"lat": 28.6358, "lon": 77.2424, "city": "Delhi"},
+}
 
 
 # ── Simple in-memory cache ────────────────────────────────────────────────────
@@ -536,3 +552,163 @@ class RealTimeDataFetcher:
                     })
 
         return {"data": matches, "source": "cricbuzz", "timestamp": self._now_iso()}
+
+    # ── Weather & Dew Factor (Open-Meteo API - FREE, no key needed) ───────────
+
+    def get_weather_and_dew(self, venue_name: str) -> dict:
+        """
+        Get real-time weather data and dew factor for a venue using Open-Meteo API.
+        This is completely free with no API key required.
+
+        Returns weather conditions optimized for evening IPL matches (19:30 IST).
+        """
+        # Check cache first
+        cache_key = f"weather_{venue_name}"
+        cached = self.cache.get(cache_key)
+        if cached:
+            return cached
+
+        # Check if venue is known
+        if venue_name not in IPL_VENUE_CITIES:
+            # Try to find venue by partial match
+            for known_venue in IPL_VENUE_CITIES:
+                if venue_name.lower() in known_venue.lower() or known_venue.lower() in venue_name.lower():
+                    venue_name = known_venue
+                    break
+            else:
+                return {
+                    "error": f"Unknown venue: {venue_name}",
+                    "venue": venue_name,
+                    "source": "none",
+                    "timestamp": self._now_iso()
+                }
+
+        loc = IPL_VENUE_CITIES[venue_name]
+
+        # Fetch from Open-Meteo (free, no API key)
+        url = (
+            f"https://api.open-meteo.com/v1/forecast"
+            f"?latitude={loc['lat']}&longitude={loc['lon']}"
+            f"&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,"
+            f"windspeed_10m,precipitation_probability"
+            f"&forecast_days=1&timezone=Asia%2FKolkata"
+        )
+
+        data = self._get(url)
+        if not data or "hourly" not in data:
+            return {
+                "error": "Weather data unavailable",
+                "venue": venue_name,
+                "city": loc["city"],
+                "source": "none",
+                "timestamp": self._now_iso()
+            }
+
+        # IPL matches usually start at 19:30 IST (7:30 PM)
+        # Index 19 in hourly array represents 7:00-8:00 PM slot
+        idx = 19
+        hourly = data["hourly"]
+
+        # Ensure index exists
+        if idx >= len(hourly.get("temperature_2m", [])):
+            idx = len(hourly.get("temperature_2m", [])) - 1
+
+        temp_c = hourly["temperature_2m"][idx]
+        humidity_pct = hourly["relativehumidity_2m"][idx]
+        dewpoint_c = hourly["dewpoint_2m"][idx]
+        wind_kmh = hourly["windspeed_10m"][idx]
+        rain_prob_pct = hourly["precipitation_probability"][idx] if idx < len(hourly.get("precipitation_probability", [])) else 0
+
+        # Calculate dew risk based on dewpoint temperature
+        # Higher dewpoint = more moisture = more dew formation
+        if dewpoint_c > 18:
+            dew_risk = "HIGH"
+            dew_impact = "Significant dew expected - batting second will be much easier"
+        elif dewpoint_c > 14:
+            dew_risk = "MODERATE"
+            dew_impact = "Moderate dew likely - slight advantage batting second"
+        else:
+            dew_risk = "LOW"
+            dew_impact = "Minimal dew - no significant impact on match"
+
+        result = {
+            "venue": venue_name,
+            "city": loc["city"],
+            "temp_c": round(temp_c, 1),
+            "humidity_pct": round(humidity_pct, 1),
+            "dewpoint_c": round(dewpoint_c, 1),
+            "wind_kmh": round(wind_kmh, 1),
+            "rain_prob_pct": round(rain_prob_pct, 1),
+            "dew_risk": dew_risk,
+            "dew_impact": dew_impact,
+            "match_time": "19:30 IST (Evening)",
+            "source": "open_meteo",
+            "timestamp": self._now_iso()
+        }
+
+        # Cache for 30 minutes
+        self.cache.set(cache_key, result, CACHE_TTL["weather"])
+        return result
+
+    def get_match_scorecard(self, match_id: str) -> dict:
+        """
+        Get detailed scorecard for a specific match using CricAPI.
+        Returns batting/bowling figures, partnerships, fall of wickets.
+        """
+        if not self.cric_api_key:
+            return {
+                "error": "CRIC_API_KEY not configured",
+                "match_id": match_id,
+                "source": "none",
+                "timestamp": self._now_iso()
+            }
+
+        data = self._get(
+            "https://api.cricapi.com/v1/match_scorecard",
+            params={"apikey": self.cric_api_key, "id": match_id}
+        )
+
+        if not data or data.get("status") != "success":
+            return {
+                "error": "Scorecard not available",
+                "match_id": match_id,
+                "source": "cric_api",
+                "timestamp": self._now_iso()
+            }
+
+        return {
+            "data": data.get("data", {}),
+            "source": "cric_api",
+            "timestamp": self._now_iso()
+        }
+
+    def get_player_info(self, player_id: str) -> dict:
+        """
+        Get player information and career statistics using CricAPI.
+        """
+        if not self.cric_api_key:
+            return {
+                "error": "CRIC_API_KEY not configured",
+                "player_id": player_id,
+                "source": "none",
+                "timestamp": self._now_iso()
+            }
+
+        data = self._get(
+            "https://api.cricapi.com/v1/players_info",
+            params={"apikey": self.cric_api_key, "id": player_id}
+        )
+
+        if not data or data.get("status") != "success":
+            return {
+                "error": "Player info not available",
+                "player_id": player_id,
+                "source": "cric_api",
+                "timestamp": self._now_iso()
+            }
+
+        return {
+            "data": data.get("data", {}),
+            "source": "cric_api",
+            "timestamp": self._now_iso()
+        }
