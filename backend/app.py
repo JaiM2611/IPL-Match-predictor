@@ -1,4 +1,11 @@
 import os
+from dotenv import load_dotenv   # ← ADD THIS
+load_dotenv()                     # ← ADD THIS
+import logging
+from flask import Flask, jsonify, request
+
+
+import os
 import logging
 from flask import Flask, jsonify, request
 from flask_cors import CORS
