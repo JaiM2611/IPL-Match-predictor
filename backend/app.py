@@ -1,14 +1,11 @@
 import os
-from dotenv import load_dotenv   # ← ADD THIS
-load_dotenv()                     # ← ADD THIS
 import logging
-from flask import Flask, jsonify, request
-
-
-import os
-import logging
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+
+# Load environment variables from .env file
+load_dotenv()
 
 from backend.predictor import IPLPredictor
 from backend.data_fetcher import RealTimeDataFetcher
