@@ -1,0 +1,1984 @@
+{
+  "MI": {
+    "name": "Mumbai Indians",
+    "short": "MI",
+    "color": "#004BA0",
+    "accent": "#D1AB3E",
+    "home_ground": "Wankhede Stadium",
+    "captain": "Hardik Pandya",
+    "coach": "Mahela Jayawardene",
+    "squad": [
+      {
+        "name": "Rohit Sharma",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 75
+      },
+      {
+        "name": "Quinton de Kock",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Suryakumar Yadav",
+        "role": "Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 85
+      },
+      {
+        "name": "Tilak Varma",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Hardik Pandya",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Ryan Rickelton",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 6,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Sherfane Rutherford",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Will Jacks",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Mitchell Santner",
+        "role": "All-rounder",
+        "batting_order": 9,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 72
+      },
+      {
+        "name": "Naman Dhir",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Shardul Thakur",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 67
+      },
+      {
+        "name": "Raj Angad Bawa",
+        "role": "All-rounder",
+        "batting_order": 9,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Robin Minz",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 7,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Atharva Ankolekar",
+        "role": "All-rounder",
+        "batting_order": 9,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Jasprit Bumrah",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 92
+      },
+      {
+        "name": "Trent Boult",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Deepak Chahar",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 73
+      },
+      {
+        "name": "Allah Ghazanfar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 70
+      },
+      {
+        "name": "Mayank Markande",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Ashwani Kumar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Raghu Sharma",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Danish Malewar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Mayank Rawat",
+        "role": "Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      }
+    ]
+  },
+  "CSK": {
+    "name": "Chennai Super Kings",
+    "short": "CSK",
+    "color": "#F9CD05",
+    "accent": "#0081E9",
+    "home_ground": "MA Chidambaram Stadium",
+    "captain": "Ruturaj Gaikwad",
+    "coach": "Stephen Fleming",
+    "squad": [
+      {
+        "name": "Ruturaj Gaikwad",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Ayush Mhatre",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Sanju Samson",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 83
+      },
+      {
+        "name": "Dewald Brevis",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Shivam Dube",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "MS Dhoni",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 6,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 70
+      },
+      {
+        "name": "Sarfaraz Khan",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Urvil Patel",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Matthew Short",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Jamie Overton",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 72
+      },
+      {
+        "name": "Kartik Sharma",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Akeal Hosein",
+        "role": "All-rounder",
+        "batting_order": 9,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Anshul Kamboj",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 72
+      },
+      {
+        "name": "Khaleel Ahmed",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Noor Ahmad",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 79
+      },
+      {
+        "name": "Nathan Ellis",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Mukesh Choudhary",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Matt Henry",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 75
+      },
+      {
+        "name": "Shreyas Gopal",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Rahul Chahar",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Gurjapneet Singh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Prashant Veer",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Ramakrishna Ghosh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Aman Khan",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Zakary Foulkes",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 60
+      }
+    ]
+  },
+  "RCB": {
+    "name": "Royal Challengers Bengaluru",
+    "short": "RCB",
+    "color": "#EC1C24",
+    "accent": "#2B2A29",
+    "home_ground": "M Chinnaswamy Stadium",
+    "captain": "Rajat Patidar",
+    "coach": "Andy Flower",
+    "squad": [
+      {
+        "name": "Virat Kohli",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 88
+      },
+      {
+        "name": "Phil Salt",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Rajat Patidar",
+        "role": "Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Devdutt Padikkal",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Tim David",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Jitesh Sharma",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 6,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 72
+      },
+      {
+        "name": "Krunal Pandya",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 75
+      },
+      {
+        "name": "Jacob Bethell",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 77
+      },
+      {
+        "name": "Romario Shepherd",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 70
+      },
+      {
+        "name": "Venkatesh Iyer",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 73
+      },
+      {
+        "name": "Jordan Cox",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Swapnil Singh",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Josh Hazlewood",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 84
+      },
+      {
+        "name": "Bhuvneshwar Kumar",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Yash Dayal",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Nuwan Thushara",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 70
+      },
+      {
+        "name": "Suyash Sharma",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Rasikh Dar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 63
+      },
+      {
+        "name": "Jacob Duffy",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Abhinandan Singh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Mangesh Yadav",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Satwik Deswal",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Vihaan Malhotra",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Kanishk Chouhan",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Vicky Ostwal",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      }
+    ]
+  },
+  "KKR": {
+    "name": "Kolkata Knight Riders",
+    "short": "KKR",
+    "color": "#3A225D",
+    "accent": "#D4AF37",
+    "home_ground": "Eden Gardens",
+    "captain": "Ajinkya Rahane",
+    "coach": "Abhishek Nayar",
+    "squad": [
+      {
+        "name": "Ajinkya Rahane",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 73
+      },
+      {
+        "name": "Angkrish Raghuvanshi",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 72
+      },
+      {
+        "name": "Sunil Narine",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 84
+      },
+      {
+        "name": "Rinku Singh",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Rovman Powell",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 75
+      },
+      {
+        "name": "Finn Allen",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 1,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 77
+      },
+      {
+        "name": "Ramandeep Singh",
+        "role": "All-rounder",
+        "batting_order": 6,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Rachin Ravindra",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Cameron Green",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Anukul Roy",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Tim Seifert",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Manish Pandey",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Rahul Tripathi",
+        "role": "Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 63
+      },
+      {
+        "name": "Matheesha Pathirana",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 88
+      },
+      {
+        "name": "Varun Chakravarthy",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Blessing Muzarabani",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Vaibhav Arora",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Umran Malik",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Harshit Rana",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 75
+      },
+      {
+        "name": "Kartik Tyagi",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Prashant Solanki",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Saurabh Dubey",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Tejasvi Singh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      }
+    ]
+  },
+  "SRH": {
+    "name": "Sunrisers Hyderabad",
+    "short": "SRH",
+    "color": "#F26522",
+    "accent": "#000000",
+    "home_ground": "Rajiv Gandhi International Stadium",
+    "captain": "Pat Cummins",
+    "coach": "Daniel Vettori",
+    "squad": [
+      {
+        "name": "Travis Head",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 90
+      },
+      {
+        "name": "Abhishek Sharma",
+        "role": "All-rounder",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Ishan Kishan",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 77
+      },
+      {
+        "name": "Heinrich Klaasen",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 4,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 85
+      },
+      {
+        "name": "Nitish Kumar Reddy",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Pat Cummins",
+        "role": "All-rounder",
+        "batting_order": 6,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Liam Livingstone",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 79
+      },
+      {
+        "name": "Kamindu Mendis",
+        "role": "All-rounder",
+        "batting_order": 4,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Aiden Markram",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 72
+      },
+      {
+        "name": "Jack Edwards",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Brydon Carse",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Harshal Patel",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Eshan Malinga",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Shivam Mavi",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Harsh Dubey",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Jaydev Unadkat",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 63
+      },
+      {
+        "name": "Zeeshan Ansari",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Salil Arora",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Aniket Verma",
+        "role": "Batsman",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "R. Smaran",
+        "role": "Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Shivang Kumar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Amit Kumar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Sakib Hussain",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      }
+    ]
+  },
+  "DC": {
+    "name": "Delhi Capitals",
+    "short": "DC",
+    "color": "#0078BC",
+    "accent": "#EF1C25",
+    "home_ground": "Arun Jaitley Stadium",
+    "captain": "Axar Patel",
+    "coach": "Hemang Badani",
+    "squad": [
+      {
+        "name": "KL Rahul",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 83
+      },
+      {
+        "name": "Ben Duckett",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Axar Patel",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "David Miller",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Tristan Stubbs",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Nitish Rana",
+        "role": "All-rounder",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Abishek Porel",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Pathum Nissanka",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Karun Nair",
+        "role": "Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Prithvi Shaw",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Ashutosh Sharma",
+        "role": "Batsman",
+        "batting_order": 6,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Sameer Rizvi",
+        "role": "Batsman",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 63
+      },
+      {
+        "name": "Kyle Jamieson",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Ajay Mandal",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Mitchell Starc",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 84
+      },
+      {
+        "name": "Kuldeep Yadav",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 83
+      },
+      {
+        "name": "T. Natarajan",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Lungi Ngidi",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Dushmantha Chameera",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Mukesh Kumar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Auqib Dar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Sahil Parakh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Vipraj Nigam",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Tripurana Vijay",
+        "role": "Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Madhav Tiwari",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      }
+    ]
+  },
+  "RR": {
+    "name": "Rajasthan Royals",
+    "short": "RR",
+    "color": "#EA1A85",
+    "accent": "#254AA5",
+    "home_ground": "Sawai Mansingh Stadium",
+    "captain": "Riyan Parag",
+    "coach": "Kumar Sangakkara",
+    "squad": [
+      {
+        "name": "Yashasvi Jaiswal",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 88
+      },
+      {
+        "name": "Vaibhav Suryavanshi",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 72
+      },
+      {
+        "name": "Riyan Parag",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Shimron Hetmyer",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Dhruv Jurel",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Ravindra Jadeja",
+        "role": "All-rounder",
+        "batting_order": 6,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 84
+      },
+      {
+        "name": "Dasun Shanaka",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Shubham Dubey",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Lhuan-Dre Pretorius",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Donovan Ferreira",
+        "role": "All-rounder",
+        "batting_order": 6,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Jofra Archer",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 86
+      },
+      {
+        "name": "Ravi Bishnoi",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Tushar Deshpande",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Kwena Maphaka",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Nandre Burger",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Sandeep Sharma",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Ravi Singh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Sushant Mishra",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Adam Milne",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Kuldeep Sen",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Yash Raj Punja",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      }
+    ]
+  },
+  "PBKS": {
+    "name": "Punjab Kings",
+    "short": "PBKS",
+    "color": "#AA4545",
+    "accent": "#DCDDDF",
+    "home_ground": "Punjab Cricket Association Stadium",
+    "captain": "Shreyas Iyer",
+    "coach": "Ricky Ponting",
+    "squad": [
+      {
+        "name": "Shreyas Iyer",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Prabhsimran Singh",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Shashank Singh",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Marcus Stoinis",
+        "role": "All-rounder",
+        "batting_order": 4,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Nehal Wadhera",
+        "role": "Batsman",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Musheer Khan",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Cooper Connolly",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Harpreet Brar",
+        "role": "Bowler",
+        "batting_order": 9,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Vishnu Vinod",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Harnoor Pannu",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Suryansh Shedge",
+        "role": "Bowler",
+        "batting_order": 9,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Arshdeep Singh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 84
+      },
+      {
+        "name": "Yuzvendra Chahal",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 81
+      },
+      {
+        "name": "Marco Jansen",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Azmatullah Omarzai",
+        "role": "All-rounder",
+        "batting_order": 6,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Ben Dwarshuis",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Xavier Bartlett",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Vyshak Vijaykumar",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Yash Thakur",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Pravin Dubey",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Vishal Nishad",
+        "role": "Batsman",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Pyla Avinash",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      }
+    ]
+  },
+  "GT": {
+    "name": "Gujarat Titans",
+    "short": "GT",
+    "color": "#1C2B5E",
+    "accent": "#D4AF37",
+    "home_ground": "Narendra Modi Stadium",
+    "captain": "Shubman Gill",
+    "coach": "Ashish Nehra",
+    "squad": [
+      {
+        "name": "Shubman Gill",
+        "role": "Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 86
+      },
+      {
+        "name": "Sai Sudharsan",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Jos Buttler",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 84
+      },
+      {
+        "name": "Washington Sundar",
+        "role": "All-rounder",
+        "batting_order": 4,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Rahul Tewatia",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Shahrukh Khan",
+        "role": "All-rounder",
+        "batting_order": 6,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Glenn Phillips",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Jason Holder",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 74
+      },
+      {
+        "name": "Rashid Khan",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 88
+      },
+      {
+        "name": "Nishant Sindhu",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Kumar Kushagra",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 3,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Anuj Rawat",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Tom Banton",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Mohammed Siraj",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Kagiso Rabada",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 86
+      },
+      {
+        "name": "Prasidh Krishna",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Ishant Sharma",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Gurnoor Singh Brar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Arshad Khan",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Manav Suthar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "R. Sai Kishore",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Jayant Yadav",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Ashok Sharma",
+        "role": "All-rounder",
+        "batting_order": 8,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 60
+      },
+      {
+        "name": "Luke Wood",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 64
+      },
+      {
+        "name": "Prithvi Raj Yarra",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      }
+    ]
+  },
+  "LSG": {
+    "name": "Lucknow Super Giants",
+    "short": "LSG",
+    "color": "#A72B2A",
+    "accent": "#F5C518",
+    "home_ground": "BRSABV Ekana Cricket Stadium",
+    "captain": "Rishabh Pant",
+    "coach": "Justin Langer",
+    "squad": [
+      {
+        "name": "Rishabh Pant",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 1,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 85
+      },
+      {
+        "name": "Nicholas Pooran",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Mitchell Marsh",
+        "role": "All-rounder",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Aiden Markram",
+        "role": "All-rounder",
+        "batting_order": 4,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 76
+      },
+      {
+        "name": "Matthew Breetzke",
+        "role": "Batsman",
+        "batting_order": 2,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 68
+      },
+      {
+        "name": "Josh Inglis",
+        "role": "Wicket-Keeper Batsman",
+        "batting_order": 3,
+        "is_overseas": true,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Abdul Samad",
+        "role": "All-rounder",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 65
+      },
+      {
+        "name": "Shahbaz Ahmed",
+        "role": "All-rounder",
+        "batting_order": 6,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Wanindu Hasaranga",
+        "role": "All-rounder",
+        "batting_order": 7,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 80
+      },
+      {
+        "name": "Ayush Badoni",
+        "role": "Batsman",
+        "batting_order": 5,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "Arshin Kulkarni",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 62
+      },
+      {
+        "name": "Mohammad Shami",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 86
+      },
+      {
+        "name": "Anrich Nortje",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": true,
+        "key_player": true,
+        "form_score": 82
+      },
+      {
+        "name": "Avesh Khan",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 75
+      },
+      {
+        "name": "Mayank Yadav",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": true,
+        "form_score": 78
+      },
+      {
+        "name": "Mohsin Khan",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 66
+      },
+      {
+        "name": "M. Siddharth",
+        "role": "Bowler",
+        "batting_order": 10,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 63
+      },
+      {
+        "name": "Arjun Tendulkar",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Naman Tiwari",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 58
+      },
+      {
+        "name": "Prince Yadav",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Digvesh Singh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      },
+      {
+        "name": "Akash Singh",
+        "role": "Bowler",
+        "batting_order": 11,
+        "is_overseas": false,
+        "key_player": false,
+        "form_score": 55
+      }
+    ]
+  }
+}

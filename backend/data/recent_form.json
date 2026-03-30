@@ -1,0 +1,102 @@
+{
+  "MI": {
+    "last5": ["W", "L", "W", "W", "L"],
+    "win_percentage": 60,
+    "runs_scored_avg": 176,
+    "runs_conceded_avg": 162,
+    "nrr": 0.432,
+    "points": 6,
+    "position": 4,
+    "matches_played": 5
+  },
+  "CSK": {
+    "last5": ["W", "W", "L", "W", "W"],
+    "win_percentage": 80,
+    "runs_scored_avg": 168,
+    "runs_conceded_avg": 152,
+    "nrr": 0.712,
+    "points": 8,
+    "position": 2,
+    "matches_played": 5
+  },
+  "RCB": {
+    "last5": ["L", "W", "W", "L", "W"],
+    "win_percentage": 60,
+    "runs_scored_avg": 182,
+    "runs_conceded_avg": 170,
+    "nrr": 0.287,
+    "points": 6,
+    "position": 5,
+    "matches_played": 5
+  },
+  "KKR": {
+    "last5": ["W", "W", "W", "L", "W"],
+    "win_percentage": 80,
+    "runs_scored_avg": 174,
+    "runs_conceded_avg": 155,
+    "nrr": 0.891,
+    "points": 8,
+    "position": 1,
+    "matches_played": 5
+  },
+  "SRH": {
+    "last5": ["W", "L", "W", "W", "L"],
+    "win_percentage": 60,
+    "runs_scored_avg": 189,
+    "runs_conceded_avg": 175,
+    "nrr": 0.156,
+    "points": 6,
+    "position": 6,
+    "matches_played": 5
+  },
+  "DC": {
+    "last5": ["L", "W", "L", "W", "W"],
+    "win_percentage": 60,
+    "runs_scored_avg": 171,
+    "runs_conceded_avg": 163,
+    "nrr": 0.124,
+    "points": 6,
+    "position": 7,
+    "matches_played": 5
+  },
+  "RR": {
+    "last5": ["W", "W", "L", "L", "W"],
+    "win_percentage": 60,
+    "runs_scored_avg": 173,
+    "runs_conceded_avg": 161,
+    "nrr": 0.321,
+    "points": 6,
+    "position": 8,
+    "matches_played": 5
+  },
+  "PBKS": {
+    "last5": ["L", "W", "W", "W", "L"],
+    "win_percentage": 60,
+    "runs_scored_avg": 178,
+    "runs_conceded_avg": 166,
+    "nrr": 0.246,
+    "points": 6,
+    "position": 9,
+    "matches_played": 5
+  },
+  "GT": {
+    "last5": ["W", "W", "L", "W", "L"],
+    "win_percentage": 60,
+    "runs_scored_avg": 167,
+    "runs_conceded_avg": 158,
+    "nrr": 0.201,
+    "points": 6,
+    "position": 3,
+    "matches_played": 5
+  },
+  "LSG": {
+    "last5": ["L", "L", "W", "L", "W"],
+    "win_percentage": 40,
+    "runs_scored_avg": 162,
+    "runs_conceded_avg": 169,
+    "nrr": -0.342,
+    "points": 4,
+    "position": 10,
+    "matches_played": 5
+  }
+}

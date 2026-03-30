@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPL 2026 Match Predictor</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="chart.min.js"></script>
+</head>
+<body>
+  <!-- ─── HEADER ─────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🏏</span>
+        <div>
+          <h1>IPL 2026 <span class="accent">Match Predictor</span></h1>
+          <p class="tagline">AI-powered predictions · Real-time data · 2026 squads</p>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-tab="predictor">Predict</button>
+        <button class="nav-btn" data-tab="points-table">Points Table</button>
+        <button class="nav-btn" data-tab="injuries">Injury Updates</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ─── TAB: PREDICTOR ──────────────────────────────────────────── -->
+    <section id="tab-predictor" class="tab-section active">
+      <div class="predict-layout">
+
+        <!-- Match Setup Form -->
+        <div class="card form-card">
+          <h2 class="card-title">⚡ Match Setup</h2>
+
+          <div class="form-grid">
+            <!-- Team 1 -->
+            <div class="form-group">
+              <label for="team1">Team 1</label>
+              <select id="team1" class="team-select">
+                <option value="">Select Team 1</option>
+              </select>
+            </div>
+
+            <!-- Team 2 -->
+            <div class="form-group">
+              <label for="team2">Team 2</label>
+              <select id="team2" class="team-select">
+                <option value="">Select Team 2</option>
+              </select>
+            </div>
+
+            <!-- Venue -->
+            <div class="form-group full-width">
+              <label for="venue">Venue</label>
+              <select id="venue">
+                <option value="">Select Venue</option>
+              </select>
+            </div>
+
+            <!-- Match Type -->
+            <div class="form-group">
+              <label for="match-type">Match Type</label>
+              <select id="match-type">
+                <option value="league">League Stage</option>
+                <option value="qualifier">Qualifier</option>
+                <option value="eliminator">Eliminator</option>
+                <option value="final">Final</option>
+              </select>
+            </div>
+
+            <!-- Time of Day -->
+            <div class="form-group">
+              <label for="time-of-day">Time of Day</label>
+              <select id="time-of-day">
+                <option value="day_night">Day-Night (Default)</option>
+                <option value="night">Night</option>
+                <option value="day">Day</option>
+              </select>
+            </div>
+
+            <!-- Toss Winner -->
+            <div class="form-group">
+              <label for="toss-winner">Toss Won By</label>
+              <select id="toss-winner">
+                <option value="">Unknown / Not Yet</option>
+              </select>
+            </div>
+
+            <!-- Toss Decision -->
+            <div class="form-group">
+              <label for="toss-decision">Toss Decision</label>
+              <select id="toss-decision">
+                <option value="bat">Bat First</option>
+                <option value="field">Field First</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Injured Players -->
+          <div class="form-group full-width injured-section">
+            <label>Mark Injured / Unavailable Players</label>
+            <div id="injured-container" class="injured-container">
+              <p class="muted">Select both teams to see squad lists.</p>
+            </div>
+          </div>
+
+          <button id="predict-btn" class="btn-primary" disabled>
+            <span class="btn-icon">🔮</span> Predict Match
+          </button>
+        </div>
+
+        <!-- Venue Info Panel -->
+        <div class="card venue-card" id="venue-info-card" style="display:none">
+          <h2 class="card-title">🏟️ Venue Info</h2>
+          <div id="venue-info-content"></div>
+        </div>
+      </div>
+
+      <!-- ─── PREDICTION RESULTS ─────────────────────────────────── -->
+      <div id="results-section" style="display:none">
+
+        <!-- Winner Banner -->
+        <div class="card winner-banner" id="winner-banner">
+          <div class="winner-vs">
+            <div class="team-block" id="team1-block">
+              <div class="team-logo-placeholder" id="team1-logo"></div>
+              <div class="team-name" id="team1-display-name"></div>
+              <div class="team-prob" id="team1-prob"></div>
+            </div>
+            <div class="vs-divider">
+              <span>VS</span>
+              <div class="confidence-badge" id="confidence-badge"></div>
+            </div>
+            <div class="team-block" id="team2-block">
+              <div class="team-logo-placeholder" id="team2-logo"></div>
+              <div class="team-name" id="team2-display-name"></div>
+              <div class="team-prob" id="team2-prob"></div>
+            </div>
+          </div>
+          <div class="winner-label" id="winner-label"></div>
+          <div class="probability-bar-wrap">
+            <div class="probability-bar" id="probability-bar">
+              <div class="prob-fill t1-fill" id="t1-fill"></div>
+              <div class="prob-fill t2-fill" id="t2-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+          <div class="card chart-card">
+            <h3 class="card-title">📊 Win Probability</h3>
+            <div class="chart-wrap">
+              <canvas id="winProbChart"></canvas>
+            </div>
+          </div>
+          <div class="card chart-card">
+            <h3 class="card-title">📈 Head-to-Head</h3>
+            <div class="chart-wrap">
+              <canvas id="h2hChart"></canvas>
+            </div>
+          </div>
+          <div class="card chart-card">
+            <h3 class="card-title">📉 Recent Form (Last 5)</h3>
+            <div class="chart-wrap">
+              <canvas id="formChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Insights -->
+        <div class="card">
+          <h3 class="card-title">🔍 Key Prediction Insights</h3>
+          <div id="insights-list" class="insights-list"></div>
+        </div>
+
+        <!-- Playing XI -->
+        <div class="xi-row">
+          <div class="card xi-card">
+            <h3 class="card-title xi-title" id="xi-title-1"></h3>
+            <div id="xi-team1" class="xi-list"></div>
+          </div>
+          <div class="card xi-card">
+            <h3 class="card-title xi-title" id="xi-title-2"></h3>
+            <div id="xi-team2" class="xi-list"></div>
+          </div>
+        </div>
+
+        <!-- Venue Stats -->
+        <div class="card" id="venue-stats-card">
+          <h3 class="card-title">🏟️ Venue Statistics</h3>
+          <div id="venue-stats-content" class="venue-stats-grid"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── TAB: POINTS TABLE ────────────────────────────────────── -->
+    <section id="tab-points-table" class="tab-section">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">📋 IPL 2026 Points Table</h2>
+          <span id="points-source-badge" class="source-badge"></span>
+        </div>
+        <div id="points-table-container">
+          <div class="loading-spinner">Loading…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TAB: INJURIES ────────────────────────────────────────── -->
+    <section id="tab-injuries" class="tab-section">
+      <div class="card">
+        <div class="card-header-row">
+          <h2 class="card-title">🏥 Player Injury & Availability Updates</h2>
+          <span id="injury-source-badge" class="source-badge"></span>
+        </div>
+        <p class="muted small">Data fetched from ESPNcricinfo where available; otherwise uses cached data.</p>
+        <div id="injuries-container">
+          <div class="loading-spinner">Loading…</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>IPL 2026 Match Predictor · AI-powered analysis · Data sourced from ESPNcricinfo &amp; historical records</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
