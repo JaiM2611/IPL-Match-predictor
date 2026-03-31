@@ -64,7 +64,7 @@ body {
   position: relative;
 }
 
-/* Animated Background */
+/* Animated Background with Particles */
 body::before {
   content: '';
   position: fixed;
@@ -78,6 +78,29 @@ body::before {
     radial-gradient(circle at 40% 20%, rgba(255, 107, 53, 0.06) 0%, transparent 50%);
   z-index: -1;
   animation: backgroundPulse 15s ease-in-out infinite;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle, rgba(255, 107, 53, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(78, 205, 196, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(168, 85, 247, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px, 100px 100px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+  z-index: -1;
+  animation: particleFloat 60s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes particleFloat {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-100px) translateX(50px); }
 }
 
 @keyframes backgroundPulse {
@@ -143,6 +166,16 @@ body::before {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 0;
+  position: relative;
+  animation: glitchText 8s ease-in-out infinite;
+}
+
+@keyframes glitchText {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-2px, 2px); }
+  94% { transform: translate(2px, -2px); }
+  96% { transform: translate(-1px, 1px); }
+  98% { transform: translate(1px, -1px); }
 }
 
 .logo .accent {
@@ -178,6 +211,7 @@ body::before {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .nav-btn::before {
@@ -192,22 +226,41 @@ body::before {
   z-index: -1;
 }
 
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
 .nav-btn:hover::before {
   left: 0;
+}
+
+.nav-btn:hover::after {
+  width: 200px;
+  height: 200px;
 }
 
 .nav-btn:hover {
   color: var(--text-primary);
   border-color: var(--accent-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-glow), 0 0 30px rgba(255, 107, 53, 0.4);
 }
 
 .nav-btn.active {
   background: var(--gradient-primary);
   color: var(--text-primary);
   border-color: transparent;
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-glow), 0 0 30px rgba(255, 107, 53, 0.5);
+  transform: scale(1.05);
 }
 
 /* ─── CONTAINER ──────────────────────────────────────────────── */
@@ -248,6 +301,18 @@ body::before {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  animation: slideInCard 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes slideInCard {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .card::before {
@@ -267,8 +332,8 @@ body::before {
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px) rotateX(2deg);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(255, 107, 53, 0.2);
   border-color: var(--border-light);
 }
 
@@ -340,17 +405,20 @@ select, input {
   font-family: inherit;
   transition: var(--transition);
   outline: none;
+  position: relative;
 }
 
 select:hover, input:hover {
   border-color: var(--border-light);
   background: rgba(36, 43, 74, 0.9);
+  transform: translateY(-1px);
 }
 
 select:focus, input:focus {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1), 0 0 20px rgba(255, 107, 53, 0.2);
   background: rgba(36, 43, 74, 1);
+  transform: scale(1.01);
 }
 
 /* ─── INJURED PLAYERS SECTION ────────────────────────────────── */
@@ -422,9 +490,15 @@ select:focus, input:focus {
   gap: 12px;
   width: 100%;
   margin-top: 28px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(255, 107, 53, 0.4);
   position: relative;
   overflow: hidden;
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% { box-shadow: var(--shadow-md), 0 0 20px rgba(255, 107, 53, 0.4); }
+  50% { box-shadow: var(--shadow-md), 0 0 40px rgba(255, 107, 53, 0.8), 0 0 60px rgba(255, 107, 53, 0.4); }
 }
 
 .btn-primary::before {
@@ -435,29 +509,36 @@ select:focus, input:focus {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
   transition: width 0.6s, height 0.6s;
 }
 
 .btn-primary:hover::before {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(255, 107, 53, 0.9), 0 0 80px rgba(255, 107, 53, 0.5);
 }
 
 .btn-primary:active {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(0.98);
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
+  100% { box-shadow: 0 0 0 40px rgba(255, 107, 53, 0); }
 }
 
 .btn-primary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  animation: none;
 }
 
 .btn-icon {
@@ -506,6 +587,18 @@ select:focus, input:focus {
   background: linear-gradient(135deg, #1e2746 0%, #2a3254 50%, #1e2746 100%);
   position: relative;
   overflow: hidden;
+  animation: bannerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes bannerEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.9) rotateX(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
 }
 
 .winner-banner::after {
@@ -515,7 +608,7 @@ select:focus, input:focus {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
   animation: shimmer 3s infinite;
 }
 
@@ -545,12 +638,33 @@ select:focus, input:focus {
   background: rgba(36, 43, 74, 0.4);
   border-radius: var(--radius-lg);
   transition: var(--transition);
+  animation: teamBlockFloat 3s ease-in-out infinite;
+}
+
+.team-block:nth-child(1) { animation-delay: 0s; }
+.team-block:nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes teamBlockFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 .team-block.winner {
   background: var(--gradient-primary);
-  box-shadow: var(--shadow-glow);
-  transform: scale(1.05);
+  box-shadow: var(--shadow-glow), 0 0 60px rgba(255, 107, 53, 0.6);
+  transform: scale(1.08);
+  animation: winnerPulse 2s ease-in-out infinite;
+}
+
+@keyframes winnerPulse {
+  0%, 100% {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-glow), 0 0 60px rgba(255, 107, 53, 0.6);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: var(--shadow-glow), 0 0 80px rgba(255, 107, 53, 0.9);
+  }
 }
 
 .team-logo-placeholder {
@@ -565,6 +679,18 @@ select:focus, input:focus {
   font-size: 2.5rem;
   font-weight: 900;
   box-shadow: var(--shadow-md);
+  animation: logoSpin 10s linear infinite;
+  transition: var(--transition);
+}
+
+@keyframes logoSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.team-block:hover .team-logo-placeholder {
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(168, 85, 247, 0.5);
 }
 
 .team-name {
@@ -580,6 +706,13 @@ select:focus, input:focus {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: numberGlow 2s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+}
+
+@keyframes numberGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
 }
 
 .vs-divider {
@@ -646,16 +779,24 @@ select:focus, input:focus {
 
 .prob-fill {
   height: 100%;
-  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  animation: fillPulse 2s ease-in-out infinite;
+}
+
+@keyframes fillPulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
 }
 
 .t1-fill {
   background: var(--gradient-primary);
+  box-shadow: inset 0 0 20px rgba(255, 107, 53, 0.5);
 }
 
 .t2-fill {
   background: var(--gradient-secondary);
+  box-shadow: inset 0 0 20px rgba(78, 205, 196, 0.5);
 }
 
 /* ─── CHARTS ─────────────────────────────────────────────────── */
@@ -690,11 +831,30 @@ select:focus, input:focus {
   border-left: 4px solid var(--accent-secondary);
   border-radius: var(--radius-sm);
   transition: var(--transition);
+  animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.insight-item:nth-child(1) { animation-delay: 0.1s; }
+.insight-item:nth-child(2) { animation-delay: 0.2s; }
+.insight-item:nth-child(3) { animation-delay: 0.3s; }
+.insight-item:nth-child(4) { animation-delay: 0.4s; }
+.insight-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .insight-item:hover {
   background: rgba(36, 43, 74, 0.8);
-  transform: translateX(4px);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: -4px 0 20px rgba(255, 107, 53, 0.3);
 }
 
 .insight-item.high {
@@ -833,6 +993,24 @@ select:focus, input:focus {
   letter-spacing: 1px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.standings-table thead th::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+  animation: scanLine 3s infinite;
+}
+
+@keyframes scanLine {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
 .standings-table thead th:first-child {
@@ -848,11 +1026,35 @@ select:focus, input:focus {
 .standings-table tbody tr {
   background: rgba(36, 43, 74, 0.4);
   transition: var(--transition);
+  animation: tableRowSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.standings-table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.standings-table tbody tr:nth-child(2) { animation-delay: 0.1s; }
+.standings-table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.standings-table tbody tr:nth-child(4) { animation-delay: 0.2s; }
+.standings-table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+.standings-table tbody tr:nth-child(6) { animation-delay: 0.3s; }
+.standings-table tbody tr:nth-child(7) { animation-delay: 0.35s; }
+.standings-table tbody tr:nth-child(8) { animation-delay: 0.4s; }
+.standings-table tbody tr:nth-child(9) { animation-delay: 0.45s; }
+.standings-table tbody tr:nth-child(10) { animation-delay: 0.5s; }
+
+@keyframes tableRowSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .standings-table tbody tr:hover {
   background: rgba(36, 43, 74, 0.7);
-  transform: scale(1.01);
+  transform: scale(1.02) translateX(5px);
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
 }
 
 .standings-table tbody td {
@@ -964,10 +1166,42 @@ select:focus, input:focus {
   border-top-color: var(--accent-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Skeleton Loading Animation */
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(36, 43, 74, 0.4) 25%,
+    rgba(36, 43, 74, 0.6) 50%,
+    rgba(36, 43, 74, 0.4) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 /* ─── RESPONSIVE ADJUSTMENTS ────────────────────────────────── */
