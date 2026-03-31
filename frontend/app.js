@@ -306,8 +306,10 @@ function renderWinnerBanner(data) {
 
   document.getElementById("team1-display-name").textContent = data.team1_name;
   document.getElementById("team2-display-name").textContent = data.team2_name;
-  document.getElementById("team1-prob").textContent = `${data.team1_probability}%`;
-  document.getElementById("team2-prob").textContent = `${data.team2_probability}%`;
+
+  // Animate probability counters
+  animateCounter("team1-prob", data.team1_probability, "%");
+  animateCounter("team2-prob", data.team2_probability, "%");
 
   const badge = document.getElementById("confidence-badge");
   badge.textContent = `${data.confidence} confidence`;
@@ -316,15 +318,17 @@ function renderWinnerBanner(data) {
   document.getElementById("winner-label").textContent =
     `🏆 Predicted Winner: ${data.predicted_winner_name}`;
 
-  // Probability bar
-  document.getElementById("t1-fill").style.width = `${data.team1_probability}%`;
-  document.getElementById("t2-fill").style.width = `${data.team2_probability}%`;
+  // Probability bar with smooth animation
+  setTimeout(() => {
+    document.getElementById("t1-fill").style.width = `${data.team1_probability}%`;
+    document.getElementById("t2-fill").style.width = `${data.team2_probability}%`;
+  }, 300);
 
   // Highlight winner team block
   const winnerBlock = data.predicted_winner === data.team1
     ? document.getElementById("team1-block")
     : document.getElementById("team2-block");
-  winnerBlock.style.filter = "drop-shadow(0 0 12px rgba(63,185,80,.5))";
+  winnerBlock.classList.add("winner");
 }
 
 function renderCharts(data) {
@@ -907,3 +911,72 @@ function capitalize(str) {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+/* ─── ANIMATION UTILITIES ───────────────────────────────────────── */
+function animateCounter(elementId, target, suffix = "") {
+  const element = document.getElementById(elementId);
+  if (!element) return;
+
+  const duration = 1500; // 1.5 seconds
+  const start = 0;
+  const range = target - start;
+  const increment = range / (duration / 16); // 60fps
+  let current = start;
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    element.textContent = Math.round(current) + suffix;
+  }, 16);
+}
+
+/* ─── MATRIX RAIN EFFECT ────────────────────────────────────────── */
+function initMatrixEffect() {
+  const canvas = document.getElementById("matrix-bg");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const chars = "01🏏🏆⚡🔥💫";
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function draw() {
+    ctx.fillStyle = "rgba(10, 14, 39, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#ff6b35";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 50);
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+
+// Initialize matrix effect on load
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initMatrixEffect);
+} else {
+  initMatrixEffect();
+}
+
