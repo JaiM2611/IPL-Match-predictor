@@ -3,33 +3,33 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Modern Color Palette */
-  --bg-primary: #0a0e27;
-  --bg-secondary: #1a1f3a;
-  --bg-tertiary: #242b4a;
-  --surface: linear-gradient(135deg, #1e2746 0%, #2a3254 100%);
-  --surface-hover: linear-gradient(135deg, #252d52 0%, #323a60 100%);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.15);
+  /* Solid Color Palette - Black, Grey, White */
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --surface: #1a1a1a;
+  --surface-hover: #2a2a2a;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.2);
 
   /* Text Colors */
   --text-primary: #ffffff;
-  --text-secondary: #b8c1ec;
-  --text-muted: #7782aa;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
 
-  /* Brand Colors */
-  --accent-primary: #ff6b35;
-  --accent-secondary: #4ecdc4;
-  --accent-tertiary: #a855f7;
-  --success: #10b981;
-  --danger: #ef4444;
-  --warning: #f59e0b;
+  /* Brand Colors - Greyscale */
+  --accent-primary: #666666;
+  --accent-secondary: #808080;
+  --accent-tertiary: #999999;
+  --success: #888888;
+  --danger: #555555;
+  --warning: #777777;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
-  --gradient-secondary: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
-  --gradient-accent: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
-  --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  /* Solid Gradients - Replaced with flat colors */
+  --gradient-primary: #666666;
+  --gradient-secondary: #808080;
+  --gradient-accent: #999999;
+  --gradient-success: #888888;
 
   /* Spacing & Effects */
   --radius-sm: 8px;
@@ -39,7 +39,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 30px rgba(255, 107, 53, 0.3);
+  --shadow-glow: 0 0 30px rgba(102, 102, 102, 0.3);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -55,7 +55,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Arial', 'Helvetica', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -73,9 +73,9 @@ body::before {
   width: 100%;
   height: 100%;
   background:
-    radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, rgba(255, 107, 53, 0.06) 0%, transparent 50%);
+    radial-gradient(circle at 20% 50%, rgba(150, 150, 150, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(120, 120, 120, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(100, 100, 100, 0.06) 0%, transparent 50%);
   z-index: -1;
   animation: backgroundPulse 15s ease-in-out infinite;
 }
@@ -88,9 +88,9 @@ body::after {
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle, rgba(255, 107, 53, 0.15) 1px, transparent 1px),
-    radial-gradient(circle, rgba(78, 205, 196, 0.15) 1px, transparent 1px),
-    radial-gradient(circle, rgba(168, 85, 247, 0.15) 1px, transparent 1px);
+    radial-gradient(circle, rgba(150, 150, 150, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(120, 120, 120, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(100, 100, 100, 0.15) 1px, transparent 1px);
   background-size: 50px 50px, 80px 80px, 100px 100px;
   background-position: 0 0, 40px 60px, 130px 270px;
   z-index: -1;
@@ -110,7 +110,7 @@ body::after {
 
 /* ─── HEADER ─────────────────────────────────────────────────── */
 .site-header {
-  background: rgba(26, 31, 58, 0.95);
+  background: rgba(26, 26, 26, 0.95);
   backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
   padding: 20px 0;
@@ -145,10 +145,7 @@ body::after {
 
 .logo-icon {
   font-size: 3rem;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary);
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -161,10 +158,7 @@ body::after {
   font-size: 1.75rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   margin: 0;
   position: relative;
   animation: glitchText 8s ease-in-out infinite;
@@ -179,10 +173,7 @@ body::after {
 }
 
 .logo .accent {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary);
 }
 
 .tagline {
@@ -252,14 +243,14 @@ body::after {
   color: var(--text-primary);
   border-color: var(--accent-primary);
   transform: translateY(-2px) scale(1.05);
-  box-shadow: var(--shadow-glow), 0 0 30px rgba(255, 107, 53, 0.4);
+  box-shadow: var(--shadow-glow), 0 0 30px rgba(102, 102, 102, 0.4);
 }
 
 .nav-btn.active {
   background: var(--gradient-primary);
   color: var(--text-primary);
   border-color: transparent;
-  box-shadow: var(--shadow-glow), 0 0 30px rgba(255, 107, 53, 0.5);
+  box-shadow: var(--shadow-glow), 0 0 30px rgba(102, 102, 102, 0.5);
   transform: scale(1.05);
 }
 
@@ -333,7 +324,7 @@ body::after {
 
 .card:hover {
   transform: translateY(-8px) rotateX(2deg);
-  box-shadow: var(--shadow-lg), 0 0 40px rgba(255, 107, 53, 0.2);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(102, 102, 102, 0.2);
   border-color: var(--border-light);
 }
 
@@ -341,10 +332,7 @@ body::after {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -416,7 +404,7 @@ select:hover, input:hover {
 
 select:focus, input:focus {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1), 0 0 20px rgba(255, 107, 53, 0.2);
+  box-shadow: 0 0 0 3px rgba(102, 102, 102, 0.1), 0 0 20px rgba(102, 102, 102, 0.2);
   background: rgba(36, 43, 74, 1);
   transform: scale(1.01);
 }
@@ -490,15 +478,15 @@ select:focus, input:focus {
   gap: 12px;
   width: 100%;
   margin-top: 28px;
-  box-shadow: var(--shadow-md), 0 0 20px rgba(255, 107, 53, 0.4);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(102, 102, 102, 0.4);
   position: relative;
   overflow: hidden;
   animation: neonPulse 2s ease-in-out infinite;
 }
 
 @keyframes neonPulse {
-  0%, 100% { box-shadow: var(--shadow-md), 0 0 20px rgba(255, 107, 53, 0.4); }
-  50% { box-shadow: var(--shadow-md), 0 0 40px rgba(255, 107, 53, 0.8), 0 0 60px rgba(255, 107, 53, 0.4); }
+  0%, 100% { box-shadow: var(--shadow-md), 0 0 20px rgba(102, 102, 102, 0.4); }
+  50% { box-shadow: var(--shadow-md), 0 0 40px rgba(102, 102, 102, 0.8), 0 0 60px rgba(102, 102, 102, 0.4); }
 }
 
 .btn-primary::before {
@@ -521,7 +509,7 @@ select:focus, input:focus {
 
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: var(--shadow-lg), 0 0 50px rgba(255, 107, 53, 0.9), 0 0 80px rgba(255, 107, 53, 0.5);
+  box-shadow: var(--shadow-lg), 0 0 50px rgba(102, 102, 102, 0.9), 0 0 80px rgba(102, 102, 102, 0.5);
 }
 
 .btn-primary:active {
@@ -530,8 +518,8 @@ select:focus, input:focus {
 }
 
 @keyframes ripple {
-  0% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7); }
-  100% { box-shadow: 0 0 0 40px rgba(255, 107, 53, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(102, 102, 102, 0.7); }
+  100% { box-shadow: 0 0 0 40px rgba(102, 102, 102, 0); }
 }
 
 .btn-primary:disabled {
@@ -584,7 +572,7 @@ select:focus, input:focus {
 .winner-banner {
   margin-bottom: 32px;
   padding: 48px 40px;
-  background: linear-gradient(135deg, #1e2746 0%, #2a3254 50%, #1e2746 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
   position: relative;
   overflow: hidden;
   animation: bannerEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -651,7 +639,7 @@ select:focus, input:focus {
 
 .team-block.winner {
   background: var(--gradient-primary);
-  box-shadow: var(--shadow-glow), 0 0 60px rgba(255, 107, 53, 0.6);
+  box-shadow: var(--shadow-glow), 0 0 60px rgba(102, 102, 102, 0.6);
   transform: scale(1.08);
   animation: winnerPulse 2s ease-in-out infinite;
 }
@@ -659,11 +647,11 @@ select:focus, input:focus {
 @keyframes winnerPulse {
   0%, 100% {
     transform: scale(1.08);
-    box-shadow: var(--shadow-glow), 0 0 60px rgba(255, 107, 53, 0.6);
+    box-shadow: var(--shadow-glow), 0 0 60px rgba(102, 102, 102, 0.6);
   }
   50% {
     transform: scale(1.12);
-    box-shadow: var(--shadow-glow), 0 0 80px rgba(255, 107, 53, 0.9);
+    box-shadow: var(--shadow-glow), 0 0 80px rgba(102, 102, 102, 0.9);
   }
 }
 
@@ -690,7 +678,7 @@ select:focus, input:focus {
 
 .team-block:hover .team-logo-placeholder {
   transform: scale(1.1) rotate(15deg);
-  box-shadow: var(--shadow-lg), 0 0 30px rgba(168, 85, 247, 0.5);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(153, 153, 153, 0.5);
 }
 
 .team-name {
@@ -702,12 +690,9 @@ select:focus, input:focus {
 .team-prob {
   font-size: 2.5rem;
   font-weight: 900;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary);
   animation: numberGlow 2s ease-in-out infinite;
-  text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+  text-shadow: 0 0 20px rgba(102, 102, 102, 0.5);
 }
 
 @keyframes numberGlow {
@@ -742,17 +727,17 @@ select:focus, input:focus {
 
 .confidence-badge.high {
   background: var(--gradient-success);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 20px rgba(136, 136, 136, 0.3);
 }
 
 .confidence-badge.medium {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  background: linear-gradient(135deg, #777777 0%, #666666 100%);
+  box-shadow: 0 0 20px rgba(119, 119, 119, 0.3);
 }
 
 .confidence-badge.low {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  background: linear-gradient(135deg, #555555 0%, #444444 100%);
+  box-shadow: 0 0 20px rgba(85, 85, 85, 0.3);
 }
 
 .winner-label {
@@ -854,7 +839,7 @@ select:focus, input:focus {
 .insight-item:hover {
   background: rgba(36, 43, 74, 0.8);
   transform: translateX(8px) scale(1.02);
-  box-shadow: -4px 0 20px rgba(255, 107, 53, 0.3);
+  box-shadow: -4px 0 20px rgba(102, 102, 102, 0.3);
 }
 
 .insight-item.high {
@@ -964,7 +949,7 @@ select:focus, input:focus {
 }
 
 .badge.overseas {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #666666 0%, #555555 100%);
 }
 
 .badge.captain {
@@ -1004,7 +989,7 @@ select:focus, input:focus {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(102, 102, 102, 0.1), transparent);
   animation: scanLine 3s infinite;
 }
 
@@ -1054,7 +1039,7 @@ select:focus, input:focus {
 .standings-table tbody tr:hover {
   background: rgba(36, 43, 74, 0.7);
   transform: scale(1.02) translateX(5px);
-  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
+  box-shadow: 0 4px 20px rgba(102, 102, 102, 0.2);
 }
 
 .standings-table tbody td {
@@ -1138,7 +1123,7 @@ select:focus, input:focus {
 
 .injury-team {
   padding: 6px 14px;
-  background: rgba(255, 107, 53, 0.2);
+  background: rgba(102, 102, 102, 0.2);
   border-radius: var(--radius-lg);
   font-weight: 700;
   font-size: 0.85rem;
@@ -1162,11 +1147,11 @@ select:focus, input:focus {
   width: 50px;
   height: 50px;
   margin: 0 auto 20px;
-  border: 4px solid rgba(255, 107, 53, 0.2);
+  border: 4px solid rgba(102, 102, 102, 0.2);
   border-top-color: var(--accent-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 0 20px rgba(102, 102, 102, 0.3);
 }
 
 @keyframes spin {
@@ -1242,7 +1227,7 @@ select:focus, input:focus {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+  background: linear-gradient(135deg, #808080 0%, #666666 100%);
 }
 
 /* ─── UTILITIES ──────────────────────────────────────────────── */
@@ -1290,7 +1275,7 @@ select:focus, input:focus {
 }
 
 .cap-table tbody tr.cap-leader {
-  background: rgba(255, 107, 53, 0.08);
+  background: rgba(102, 102, 102, 0.08);
 }
 
 .cap-table td {
@@ -1314,8 +1299,8 @@ select:focus, input:focus {
   font-size: 1.05rem;
 }
 
-.orange-text { color: #ff8c42 !important; }
-.purple-text { color: #a855f7 !important; }
+.orange-text { color: #808080 !important; }
+.purple-text { color: #999999 !important; }
 
 /* ─── LIVE SCORES ─────────────────────────────────────────── */
 .live-matches-list {
@@ -1355,8 +1340,8 @@ select:focus, input:focus {
   border-radius: 20px;
   font-size: 0.78rem;
   font-weight: 700;
-  background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+  background: rgba(85, 85, 85, 0.2);
+  color: #555555;
   white-space: nowrap;
 }
 
@@ -1391,7 +1376,7 @@ select:focus, input:focus {
 }
 
 /* ─── SOURCE BADGE VARIANTS ───────────────────────────────── */
-.source-badge.live   { background: rgba(16,185,129,0.15); color: #10b981; }
-.source-badge.cached { background: rgba(59,130,246,0.15); color: #3b82f6; }
-.source-badge.stale  { background: rgba(245,158,11,0.15); color: #f59e0b; }
-.source-badge.error  { background: rgba(239,68,68,0.15);  color: #ef4444; }
+.source-badge.live   { background: rgba(136,136,136,0.15); color: #888888; }
+.source-badge.cached { background: rgba(102,102,102,0.15); color: #666666; }
+.source-badge.stale  { background: rgba(119,119,119,0.15); color: #777777; }
+.source-badge.error  { background: rgba(85,85,85,0.15);  color: #555555; }
