@@ -1,6 +1,8 @@
 import json
 import os
 import math
+import random
+import numpy as np
 from typing import Dict, List, Tuple, Optional
 
 try:
@@ -684,9 +686,199 @@ class IPLPredictor:
 
         return t1_score, t2_score, weather_factor
 
+    def _apply_monte_carlo_variation(
+        self,
+        base_value: float,
+        variation_pct: float = 10.0,
+        min_val: float = 0.0,
+        max_val: float = 1.0
+    ) -> float:
+        """
+        Apply random variation to a base value for Monte Carlo simulation.
+
+        Args:
+            base_value: The base value to vary
+            variation_pct: Percentage variation to apply (e.g., 10 = ±10%)
+            min_val: Minimum allowed value
+            max_val: Maximum allowed value
+
+        Returns:
+            Varied value within bounds
+        """
+        # Generate random variation using normal distribution
+        variation = random.gauss(0, variation_pct / 100.0)
+        varied_value = base_value * (1 + variation)
+
+        # Ensure bounds
+        return max(min_val, min(max_val, varied_value))
+
+    def _run_single_simulation(
+        self,
+        team1: str,
+        team2: str,
+        venue: str,
+        match_type: str,
+        time_of_day: str,
+        toss_winner: str,
+        toss_decision: str,
+        injured_players: List[str],
+        weather_data: Optional[dict],
+        apply_variation: bool = True
+    ) -> Tuple[float, float]:
+        """
+        Run a single Monte Carlo simulation with random variations.
+
+        Returns:
+            Tuple of (team1_probability, team2_probability)
+        """
+        # Calculate base scores
+        t1_score, t2_score, _ = self._calculate_scores(
+            team1, team2, venue, match_type, time_of_day,
+            toss_winner, toss_decision, injured_players,
+        )
+
+        # Apply weather adjustments if available
+        if weather_data and not weather_data.get("error"):
+            t1_score, t2_score, _ = self._apply_weather_adjustments(
+                t1_score, t2_score, weather_data, toss_decision, time_of_day
+            )
+
+        if apply_variation:
+            # Apply random variations to simulate uncertainty
+            # Form variation: ±15% (form can be volatile)
+            t1_form_var = self._apply_monte_carlo_variation(
+                self._get_recent_form_score(team1),
+                variation_pct=15.0
+            )
+            t2_form_var = self._apply_monte_carlo_variation(
+                self._get_recent_form_score(team2),
+                variation_pct=15.0
+            )
+
+            # Momentum variation: ±20% (momentum is highly variable)
+            t1_mom_var = self._apply_monte_carlo_variation(
+                self._calculate_momentum(team1),
+                variation_pct=20.0
+            )
+            t2_mom_var = self._apply_monte_carlo_variation(
+                self._calculate_momentum(team2),
+                variation_pct=20.0
+            )
+
+            # Squad strength variation: ±10% (injuries, form on the day)
+            t1_squad_var = self._apply_monte_carlo_variation(
+                self._calculate_squad_strength(team1, injured_players),
+                variation_pct=10.0,
+                min_val=0.3,
+                max_val=1.2
+            )
+            t2_squad_var = self._apply_monte_carlo_variation(
+                self._calculate_squad_strength(team2, injured_players),
+                variation_pct=10.0,
+                min_val=0.3,
+                max_val=1.2
+            )
+
+            # Apply variations to scores
+            # Recalculate with varied form
+            form_adjustment_t1 = (t1_form_var - self._get_recent_form_score(team1)) * self.WEIGHTS["recent_form"]
+            form_adjustment_t2 = (t2_form_var - self._get_recent_form_score(team2)) * self.WEIGHTS["recent_form"]
+            t1_score += form_adjustment_t1
+            t2_score += form_adjustment_t2
+
+            # Recalculate with varied momentum
+            mom_adjustment_t1 = (t1_mom_var - self._calculate_momentum(team1)) * self.WEIGHTS["momentum"]
+            mom_adjustment_t2 = (t2_mom_var - self._calculate_momentum(team2)) * self.WEIGHTS["momentum"]
+            t1_score += mom_adjustment_t1
+            t2_score += mom_adjustment_t2
+
+            # Apply squad strength multiplier variation
+            base_squad_t1 = self._calculate_squad_strength(team1, injured_players)
+            base_squad_t2 = self._calculate_squad_strength(team2, injured_players)
+            if base_squad_t1 > 0:
+                t1_score = t1_score / base_squad_t1 * t1_squad_var
+            if base_squad_t2 > 0:
+                t2_score = t2_score / base_squad_t2 * t2_squad_var
+
+            # Add random match-day performance variation (±5%)
+            t1_score *= (1 + random.gauss(0, 0.05))
+            t2_score *= (1 + random.gauss(0, 0.05))
+
+        # Calculate probabilities using sigmoid
+        score_diff = t1_score - t2_score
+        exponent = score_diff / 30.0
+        sigmoid = 1 / (1 + math.exp(-exponent))
+
+        t1_prob = sigmoid * 100
+        t2_prob = (1 - sigmoid) * 100
+
+        return t1_prob, t2_prob
+
+    def _monte_carlo_predict(
+        self,
+        team1: str,
+        team2: str,
+        venue: str,
+        match_type: str,
+        time_of_day: str,
+        toss_winner: str,
+        toss_decision: str,
+        injured_players: List[str],
+        weather_data: Optional[dict],
+        num_simulations: int = 1000
+    ) -> Tuple[float, float, float]:
+        """
+        Run Monte Carlo simulation to predict match outcome with uncertainty quantification.
+
+        Args:
+            num_simulations: Number of Monte Carlo simulations to run (default: 1000)
+
+        Returns:
+            Tuple of (team1_probability, team2_probability, confidence_score)
+        """
+        t1_probs = []
+        t2_probs = []
+
+        # Run multiple simulations
+        for _ in range(num_simulations):
+            t1_prob, t2_prob = self._run_single_simulation(
+                team1, team2, venue, match_type, time_of_day,
+                toss_winner, toss_decision, injured_players, weather_data,
+                apply_variation=True
+            )
+            t1_probs.append(t1_prob)
+            t2_probs.append(t2_prob)
+
+        # Calculate statistics
+        t1_mean = np.mean(t1_probs)
+        t2_mean = np.mean(t2_probs)
+        t1_std = np.std(t1_probs)
+        t2_std = np.std(t2_probs)
+
+        # Confidence is inversely related to standard deviation
+        # Lower std = higher confidence
+        avg_std = (t1_std + t2_std) / 2
+
+        # Calculate confidence score (0-1 scale)
+        # Lower std (< 5%) = very high confidence
+        # Higher std (> 15%) = low confidence
+        if avg_std < 5:
+            confidence_score = 0.95
+        elif avg_std < 8:
+            confidence_score = 0.85
+        elif avg_std < 12:
+            confidence_score = 0.70
+        elif avg_std < 18:
+            confidence_score = 0.55
+        else:
+            confidence_score = 0.40
+
+        return round(t1_mean, 1), round(t2_mean, 1), confidence_score
+
     def predict(self, match_params: dict) -> dict:
         """
         Generate match prediction with enhanced accuracy using:
+        - Monte Carlo simulation with 1000+ iterations
         - Logistic transformation for realistic probabilities
         - Comprehensive factor analysis
         - Context-aware confidence scoring
@@ -701,18 +893,50 @@ class IPLPredictor:
         toss_decision = match_params.get("toss_decision", "bat")
         injured_players = match_params.get("injured_players", [])
         weather_data = match_params.get("weather_data")  # Optional weather data
+        num_simulations = match_params.get("num_simulations", 1000)  # Default: 1000 simulations
+        use_monte_carlo = match_params.get("use_monte_carlo", True)  # Enable by default
 
         if team1 not in self.teams:
             return {"error": f"Unknown team: {team1}"}
         if team2 not in self.teams:
             return {"error": f"Unknown team: {team2}"}
 
+        # Use Monte Carlo simulation for improved accuracy
+        if use_monte_carlo:
+            t1_prob, t2_prob, mc_confidence = self._monte_carlo_predict(
+                team1, team2, venue, match_type, time_of_day,
+                toss_winner, toss_decision, injured_players, weather_data,
+                num_simulations
+            )
+        else:
+            # Fallback to original deterministic method
+            t1_score, t2_score, factors = self._calculate_scores(
+                team1, team2, venue, match_type, time_of_day,
+                toss_winner, toss_decision, injured_players,
+            )
+
+            # Apply weather-based adjustments if weather data is provided
+            if weather_data and not weather_data.get("error"):
+                t1_score, t2_score, weather_factor = self._apply_weather_adjustments(
+                    t1_score, t2_score, weather_data, toss_decision, time_of_day
+                )
+
+            # Calculate probabilities using sigmoid
+            score_diff = t1_score - t2_score
+            exponent = score_diff / 30.0
+            sigmoid = 1 / (1 + math.exp(-exponent))
+
+            t1_prob = round(sigmoid * 100, 1)
+            t2_prob = round((1 - sigmoid) * 100, 1)
+            mc_confidence = None
+
+        # Get detailed factors for analysis (using deterministic calculation)
         t1_score, t2_score, factors = self._calculate_scores(
             team1, team2, venue, match_type, time_of_day,
             toss_winner, toss_decision, injured_players,
         )
 
-        # Apply weather-based adjustments if weather data is provided
+        # Apply weather-based adjustments to factors if weather data is provided
         if weather_data and not weather_data.get("error"):
             t1_score, t2_score, weather_factor = self._apply_weather_adjustments(
                 t1_score, t2_score, weather_data, toss_decision, time_of_day
@@ -720,37 +944,39 @@ class IPLPredictor:
             if weather_factor:
                 factors.append(weather_factor)
 
-        # Enhanced probability calculation using logistic transformation
-        # This prevents extreme probabilities and gives more realistic predictions
-        score_diff = t1_score - t2_score
-
-        # Apply sigmoid function for smoother probability distribution
-        # This makes predictions more conservative and realistic
-        exponent = score_diff / 30.0  # Scaling factor tuned for IPL matches
-        sigmoid = 1 / (1 + math.exp(-exponent))
-
-        # Convert to percentage and ensure it's bounded
-        t1_prob = round(sigmoid * 100, 1)
-        t2_prob = round((1 - sigmoid) * 100, 1)
-
         # Ensure probabilities sum to 100% (handle rounding)
         if t1_prob + t2_prob != 100.0:
             t2_prob = round(100.0 - t1_prob, 1)
 
-        winner = team1 if t1_score >= t2_score else team2
+        winner = team1 if t1_prob >= t2_prob else team2
         margin = abs(t1_prob - t2_prob)
 
-        # More nuanced confidence levels based on probability margin
-        if margin > 25:
-            confidence = "Very High"
-        elif margin > 15:
-            confidence = "High"
-        elif margin > 8:
-            confidence = "Medium"
-        elif margin > 3:
-            confidence = "Low"
+        # More nuanced confidence levels
+        # If Monte Carlo is used, incorporate MC confidence
+        if mc_confidence is not None:
+            # Combine margin and MC confidence
+            if margin > 25 and mc_confidence > 0.80:
+                confidence = "Very High"
+            elif margin > 15 and mc_confidence > 0.70:
+                confidence = "High"
+            elif margin > 8 or mc_confidence > 0.60:
+                confidence = "Medium"
+            elif margin > 3 or mc_confidence > 0.50:
+                confidence = "Low"
+            else:
+                confidence = "Very Low"
         else:
-            confidence = "Very Low"
+            # Original confidence calculation
+            if margin > 25:
+                confidence = "Very High"
+            elif margin > 15:
+                confidence = "High"
+            elif margin > 8:
+                confidence = "Medium"
+            elif margin > 3:
+                confidence = "Low"
+            else:
+                confidence = "Very Low"
 
         t1_xi = self._get_playing_xi(team1, venue, injured_players)
         t2_xi = self._get_playing_xi(team2, venue, injured_players)
@@ -790,8 +1016,16 @@ class IPLPredictor:
             "recent_form": form_data,
             "match_type": match_type,
             "time_of_day": time_of_day,
-            "model_version": "2.1-weather",  # Track model version
+            "model_version": "2.2-monte-carlo",  # Track model version
         }
+
+        # Add Monte Carlo metadata if used
+        if use_monte_carlo and mc_confidence is not None:
+            result["monte_carlo"] = {
+                "enabled": True,
+                "simulations": num_simulations,
+                "confidence_score": round(mc_confidence, 3)
+            }
 
         # Add weather data if available
         if weather_data and not weather_data.get("error"):

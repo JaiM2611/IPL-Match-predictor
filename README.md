@@ -4,7 +4,11 @@ Advanced IPL match prediction engine powered by enhanced machine learning algori
 
 ## ✨ Latest Updates (2026)
 
-### 🎯 Enhanced Prediction Model v2.1 (Weather Integration)
+### 🎲 Enhanced Prediction Model v2.2 (Monte Carlo Simulation)
+- **Monte Carlo Simulation**: Probabilistic approach with 1000+ iterations for improved accuracy
+- **Uncertainty Quantification**: Random variations in form, momentum, and squad strength
+- **Statistical Confidence**: Confidence scores based on simulation variance
+- **Adaptive Predictions**: Accounts for match-day performance variability
 - **Real-Time Weather Data**: Live weather conditions via Open-Meteo API (100% FREE, no API key needed!)
 - **Dew Factor Analysis**: Precise dew point calculations for accurate chasing advantage predictions
 - **Momentum Analysis**: Exponentially weighted recent match performance
@@ -86,7 +90,28 @@ export GNEWS_API_KEY="your-gnews-key"
 | `GET /api/venues` | GET | All IPL venues |
 | `GET /api/squad/<team>` | GET | Team squad & player details |
 | `GET /api/h2h/<team1>/<team2>` | GET | Head-to-head record |
-| `POST /api/predict` | POST | Generate match prediction |
+| `POST /api/predict` | POST | Generate match prediction with Monte Carlo simulation |
+
+**Prediction Request Body:**
+```json
+{
+  "team1": "MI",
+  "team2": "CSK",
+  "venue": "Wankhede Stadium",
+  "match_type": "league",
+  "time_of_day": "night",
+  "toss_winner": "MI",
+  "toss_decision": "bat",
+  "injured_players": [],
+  "weather_data": {},
+  "use_monte_carlo": true,
+  "num_simulations": 1000
+}
+```
+
+**Monte Carlo Parameters:**
+- `use_monte_carlo` (boolean, default: `true`): Enable/disable Monte Carlo simulation
+- `num_simulations` (integer, default: `1000`): Number of simulations to run (100-5000 recommended)
 
 ### Real-Time Data
 
